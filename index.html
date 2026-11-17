@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sashidhar Sripadanna | AI Governance & Technical Account Bridge</title>
-  <meta name="description" content="AI Governance & Technical Account Bridge helping Indian SaaS and GCCs turn AI features into enterprise-ready, auditable systems." />
+  <meta name="description" content="AI Governance & Risk Advisor with 13+ years of Cloud, DevOps & Enterprise Infrastructure Engineering — helping EU & Indian enterprises turn AI systems into audit-ready architectures." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -13,19 +13,15 @@
       --primary: #0f172a;
       --accent: #2563eb;
       --accent-hover: #1d4ed8;
+      --emerald: #059669;
       --bg: #f8fafc;
       --card: #ffffff;
       --text: #1e293b;
       --muted: #64748b;
       --border: #e2e8f0;
-      --success: #059669;
     }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -35,10 +31,7 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
+    a { text-decoration: none; color: inherit; }
 
     /* Navigation */
     nav {
@@ -48,11 +41,11 @@
       position: sticky;
       top: 0;
       z-index: 100;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.12);
     }
 
     .nav-container {
-      max-width: 1100px;
+      max-width: 1120px;
       margin: 0 auto;
       padding: 0 1.5rem;
       display: flex;
@@ -60,61 +53,47 @@
       align-items: center;
     }
 
-    .logo {
-      font-weight: 700;
-      font-size: 1.1rem;
-    }
-
-    .logo span {
-      display: block;
-      font-size: 0.75rem;
-      font-weight: 400;
-      opacity: 0.8;
-      margin-top: 2px;
-    }
+    .logo { font-weight: 700; font-size: 1.1rem; }
+    .logo span { display: block; font-size: 0.75rem; font-weight: 400; opacity: 0.8; margin-top: 2px; }
 
     .nav-links {
       display: flex;
-      gap: 1.75rem;
+      gap: 1.5rem;
       align-items: center;
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       font-weight: 500;
     }
 
-    .nav-links a:hover {
-      color: #93c5fd;
-    }
+    .nav-links a:hover { color: #93c5fd; }
 
     .btn-nav {
       background: var(--accent);
       color: white !important;
-      padding: 0.5rem 1rem;
+      padding: 0.5rem 0.95rem;
       border-radius: 6px;
       font-weight: 600;
     }
 
-    .btn-nav:hover {
-      background: var(--accent-hover);
-    }
+    .btn-nav:hover { background: var(--accent-hover); }
 
     /* Hero */
     .hero {
       background: linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
       color: white;
-      padding: 5rem 1.5rem 4.5rem;
+      padding: 4.75rem 1.5rem 4.25rem;
       text-align: center;
     }
 
     .hero-badge {
       display: inline-block;
-      background: rgba(37, 99, 235, 0.2);
+      background: rgba(37, 99, 235, 0.22);
       color: #93c5fd;
-      font-size: 0.8rem;
-      font-weight: 600;
-      padding: 0.35rem 0.9rem;
+      font-size: 0.78rem;
+      font-weight: 700;
+      padding: 0.35rem 0.95rem;
       border-radius: 999px;
-      margin-bottom: 1.5rem;
-      letter-spacing: 0.02em;
+      margin-bottom: 1.35rem;
+      letter-spacing: 0.03em;
     }
 
     .hero h1 {
@@ -122,29 +101,29 @@
       font-weight: 800;
       line-height: 1.2;
       margin-bottom: 1rem;
-      max-width: 800px;
+      max-width: 840px;
       margin-left: auto;
       margin-right: auto;
     }
 
     .hero .subtitle {
-      font-size: 1.25rem;
+      font-size: 1.2rem;
       color: #cbd5e1;
-      max-width: 640px;
-      margin: 0 auto 1.25rem;
+      max-width: 720px;
+      margin: 0 auto 1.1rem;
       font-weight: 500;
     }
 
     .hero .desc {
-      font-size: 1.05rem;
+      font-size: 1.02rem;
       color: #94a3b8;
-      max-width: 620px;
-      margin: 0 auto 2.25rem;
+      max-width: 680px;
+      margin: 0 auto 2.1rem;
     }
 
     .hero-buttons {
       display: flex;
-      gap: 1rem;
+      gap: 0.9rem;
       justify-content: center;
       flex-wrap: wrap;
     }
@@ -153,58 +132,68 @@
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
-      padding: 0.85rem 1.6rem;
+      padding: 0.85rem 1.5rem;
       border-radius: 8px;
       font-weight: 600;
-      font-size: 0.95rem;
+      font-size: 0.94rem;
       transition: all 0.2s;
     }
 
-    .btn-primary {
-      background: var(--accent);
-      color: white;
+    .btn-primary { background: var(--accent); color: white; }
+    .btn-primary:hover { background: var(--accent-hover); transform: translateY(-1px); }
+
+    .btn-emerald { background: var(--emerald); color: white; }
+    .btn-emerald:hover { background: #047857; transform: translateY(-1px); }
+
+    .btn-secondary { background: transparent; color: white; border: 1.5px solid #475569; }
+    .btn-secondary:hover { border-color: #94a3b8; background: rgba(255,255,255,0.05); }
+
+    /* Proof Strip */
+    .proof-strip {
+      background: white;
+      border-bottom: 1px solid var(--border);
+      padding: 1.5rem;
     }
 
-    .btn-primary:hover {
-      background: var(--accent-hover);
-      transform: translateY(-1px);
+    .proof-grid {
+      max-width: 1120px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.25rem;
+      text-align: center;
     }
 
-    .btn-secondary {
-      background: transparent;
-      color: white;
-      border: 1.5px solid #475569;
+    .proof-item strong {
+      display: block;
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: var(--primary);
     }
 
-    .btn-secondary:hover {
-      border-color: #94a3b8;
-      background: rgba(255,255,255,0.05);
+    .proof-item span {
+      font-size: 0.84rem;
+      color: var(--muted);
     }
 
     /* Sections */
-    section {
-      padding: 4.5rem 1.5rem;
-    }
-
-    .container {
-      max-width: 1100px;
-      margin: 0 auto;
-    }
+    section { padding: 4.25rem 1.5rem; }
+    .container { max-width: 1120px; margin: 0 auto; }
 
     .section-title {
       font-size: 1.75rem;
       font-weight: 750;
       color: var(--primary);
-      margin-bottom: 0.75rem;
+      margin-bottom: 0.65rem;
       text-align: center;
     }
 
     .section-subtitle {
       text-align: center;
       color: var(--muted);
-      max-width: 560px;
-      margin: 0 auto 2.75rem;
-      font-size: 1.05rem;
+      max-width: 640px;
+      margin: 0 auto 2.5rem;
+      font-size: 1.02rem;
     }
 
     /* Bridge Cards */
@@ -228,24 +217,15 @@
     }
 
     .card-number {
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       font-weight: 700;
       color: var(--accent);
-      margin-bottom: 0.75rem;
+      margin-bottom: 0.65rem;
       letter-spacing: 0.03em;
     }
 
-    .card h3 {
-      font-size: 1.15rem;
-      font-weight: 700;
-      margin-bottom: 0.6rem;
-      color: var(--primary);
-    }
-
-    .card p {
-      color: var(--muted);
-      font-size: 0.95rem;
-    }
+    .card h3 { font-size: 1.15rem; font-weight: 700; margin-bottom: 0.6rem; color: var(--primary); }
+    .card p { color: var(--muted); font-size: 0.94rem; }
 
     /* Kit Table */
     .kits {
@@ -255,62 +235,49 @@
       overflow: hidden;
     }
 
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 0.9rem;
-    }
+    table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
 
     th {
       background: #f1f5f9;
       text-align: left;
-      padding: 1rem 1.25rem;
+      padding: 1rem 1.2rem;
       font-weight: 600;
       color: var(--primary);
       border-bottom: 1px solid var(--border);
     }
 
     td {
-      padding: 1.1rem 1.25rem;
+      padding: 1.05rem 1.2rem;
       border-bottom: 1px solid var(--border);
       vertical-align: top;
     }
 
-    tr:last-child td {
-      border-bottom: none;
-    }
+    tr:last-child td { border-bottom: none; }
+    td a { color: var(--accent); font-weight: 600; }
+    td a:hover { text-decoration: underline; }
+    .kit-window { font-size: 0.8rem; color: var(--muted); white-space: nowrap; }
 
-    td a {
-      color: var(--accent);
-      font-weight: 600;
-    }
-
-    td a:hover {
-      text-decoration: underline;
-    }
-
-    .kit-window {
-      font-size: 0.8rem;
-      color: var(--muted);
-      white-space: nowrap;
+    .live-pill {
+      display: inline-block;
+      background: #dcfce7;
+      color: #166534;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 0.15rem 0.5rem;
+      border-radius: 999px;
+      margin-left: 0.4rem;
     }
 
     /* Background */
-    .bg-section {
-      background: white;
-    }
-
+    .bg-section { background: white; }
     .bg-grid {
       display: grid;
-      grid-template-columns: 1.4fr 1fr;
+      grid-template-columns: 1.45fr 1fr;
       gap: 3rem;
       align-items: start;
     }
 
-    .bg-list {
-      list-style: none;
-    }
-
+    .bg-list { list-style: none; }
     .bg-list li {
       padding: 0.6rem 0;
       padding-left: 1.5rem;
@@ -334,7 +301,7 @@
     }
 
     .credentials h4 {
-      font-size: 0.85rem;
+      font-size: 0.82rem;
       text-transform: uppercase;
       letter-spacing: 0.04em;
       color: var(--muted);
@@ -344,7 +311,8 @@
     .credentials p {
       font-weight: 600;
       color: var(--primary);
-      font-size: 0.95rem;
+      font-size: 0.93rem;
+      margin-bottom: 0.55rem;
     }
 
     /* Contact */
@@ -356,16 +324,8 @@
       text-align: center;
     }
 
-    .contact-box h2 {
-      font-size: 1.6rem;
-      margin-bottom: 0.75rem;
-    }
-
-    .contact-box p {
-      color: #94a3b8;
-      max-width: 480px;
-      margin: 0 auto 1.75rem;
-    }
+    .contact-box h2 { font-size: 1.6rem; margin-bottom: 0.75rem; }
+    .contact-box p { color: #94a3b8; max-width: 520px; margin: 0 auto 1.75rem; }
 
     .contact-email {
       display: inline-block;
@@ -377,16 +337,9 @@
       margin-bottom: 1rem;
     }
 
-    .contact-email:hover {
-      background: var(--accent-hover);
-    }
+    .contact-email:hover { background: var(--accent-hover); }
+    .contact-meta { font-size: 0.9rem; color: #94a3b8; }
 
-    .contact-meta {
-      font-size: 0.9rem;
-      color: #64748b;
-    }
-
-    /* Footer */
     footer {
       text-align: center;
       padding: 2rem 1.5rem;
@@ -395,24 +348,11 @@
       border-top: 1px solid var(--border);
     }
 
-    /* Responsive */
     @media (max-width: 768px) {
-      .nav-links {
-        display: none;
-      }
-      .hero {
-        padding: 3.5rem 1.25rem 3rem;
-      }
-      .bg-grid {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-      }
-      th, td {
-        padding: 0.85rem 0.9rem;
-      }
-      .kits {
-        overflow-x: auto;
-      }
+      .nav-links { display: none; }
+      .hero { padding: 3.5rem 1.25rem 3rem; }
+      .bg-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .kits { overflow-x: auto; }
     }
   </style>
 </head>
@@ -423,11 +363,12 @@
     <div class="nav-container">
       <div class="logo">
         Sashidhar Sripadanna
-        <span>AI Governance & Technical Account Bridge</span>
+        <span>AI Governance &amp; Technical Account Bridge</span>
       </div>
       <div class="nav-links">
         <a href="#help">How I Help</a>
-        <a href="#work">ComplyBridge Work</a>
+        <a href="#work">ComplyBridge Suite</a>
+        <a href="control-plane.html" style="color:#6ee7b7; font-weight:700;">Live Control Plane</a>
         <a href="#background">Background</a>
         <a href="#contact">Contact</a>
         <a href="https://github.com/Sashidhar2508/complybridge-ai-governance-kit" class="btn-nav" target="_blank">GitHub Suite →</a>
@@ -437,45 +378,70 @@
 
   <!-- Hero -->
   <header class="hero">
-    <div class="hero-badge">INDEPENDENT ADVISORY & PROOF OF WORK</div>
-    <h1>AI Governance & Technical Account Bridge</h1>
-    <p class="subtitle">Helping Indian SaaS companies and GCCs turn AI features into enterprise-ready, auditable systems</p>
+    <div class="hero-badge">13+ YRS CLOUD &amp; INFRASTRUCTURE ENGINEERING  ·  AI GOVERNANCE &amp; RISK BRIDGE</div>
+    <h1>AI Governance &amp; Technical Account Bridge</h1>
+    <p class="subtitle">Translating Cloud, DevOps &amp; AI architectures into auditable controls across EU AI Act, DORA, GDPR, ISO/IEC 42001 &amp; India DPDP</p>
     <p class="desc">
-      I translate complex cloud and AI engineering into clear governance evidence that European and US buyers accept — without Big 4 overhead.
+      I speak fluent engineering jargon with platform teams while delivering audit-ready regulatory evidence that European banks, enterprise CISOs, and procurement teams accept.
     </p>
     <div class="hero-buttons">
+      <a href="control-plane.html" class="btn btn-emerald">
+        Launch Live AI Governance Control Plane →
+      </a>
       <a href="https://github.com/Sashidhar2508/complybridge-ai-governance-kit" class="btn btn-primary" target="_blank">
-        View the ComplyBridge Governance Kit →
+        View ComplyBridge GitHub Suite ↗
       </a>
       <a href="#contact" class="btn btn-secondary">
-        Discuss a specific AI system or questionnaire
+        Discuss a Role or AI Risk Review
       </a>
     </div>
   </header>
 
+  <!-- Proof Metrics Strip -->
+  <div class="proof-strip">
+    <div class="proof-grid">
+      <div class="proof-item">
+        <strong>13+ Years</strong>
+        <span>US &amp; India Cloud, DevOps, Middleware &amp; SLA Governance</span>
+      </div>
+      <div class="proof-item">
+        <strong>6 Toolkits + Case Studies</strong>
+        <span>EU AI Act, DORA (CBI), GDPR (Irish DPC) &amp; ISO 42001</span>
+      </div>
+      <div class="proof-item">
+        <strong>48-Hour Turnaround</strong>
+        <span>Enterprise Buyer AI Security &amp; Due-Diligence Packs</span>
+      </div>
+      <div class="proof-item">
+        <strong>$2M Saved · 99.9% SLA</strong>
+        <span>Zero-Downtime Enterprise OIDC Cloud Migration</span>
+      </div>
+    </div>
+  </div>
+
   <!-- How I Help -->
   <section id="help">
     <div class="container">
-      <h2 class="section-title">The Bridge I Provide</h2>
+      <h2 class="section-title">The Governance-Engineering Bridge</h2>
       <p class="section-subtitle">
-        Structured, audit-ready governance artefacts built to unblock enterprise security and procurement reviews.
+        Structured, audit-ready governance artefacts and Policy-as-Code gates built to unblock enterprise security and regulatory reviews.
       </p>
 
       <div class="cards">
         <div class="card">
-          <div class="card-number">01 • SCOPE & RISK TIER</div>
-          <h3>Inventory & Classification</h3>
-          <p>Create clarity on what AI systems exist, who is the Provider vs Deployer, and what risk tier each system falls under under the EU AI Act and NIST AI RMF.</p>
+          <div class="card-number">01 • REGULATORY SCOPING &amp; HIGH-RISK READINESS</div>
+          <h3>Inventory, Annex III &amp; DORA Alignment</h3>
+          <p>Clarify Provider vs. Deployer obligations under the EU AI Act (Art. 50 live rules &amp; Annex III High-Risk readiness), GDPR DPIAs, and DORA third-party ICT registers.</p>
         </div>
         <div class="card">
-          <div class="card-number">02 • 48-HOUR TURNAROUND</div>
-          <h3>Enterprise Evidence Packs</h3>
-          <p>Produce buyer-ready documentation covering transparency, human oversight, data controls, and incident response that can be turned around in 48 hours.</p>
+          <div class="card-number">02 • 48-HOUR ENTERPRISE BUYER TURNAROUND</div>
+          <h3>Customer Trust &amp; Evidence Packs</h3>
+          <p>Compress multi-week enterprise buyer security and AI questionnaires into 48 hours using standardized Model Cards, human-oversight rules, and incident SLAs.</p>
         </div>
         <div class="card">
-          <div class="card-number">03 • UPSTREAM & IP HYGIENE</div>
-          <h3>Vendor & IP Risk</h3>
-          <p>Assess upstream foundation models for Zero-Data-Retention, patent/IP exposure, and contractual safeguards before they create deal risk.</p>
+          <div class="card-number">03 • POLICY-AS-CODE &amp; UPSTREAM VENDOR HYGIENE</div>
+          <h3>OPA Release Gates, ZDR &amp; IP Risk</h3>
+          <p>Enforce Zero-Data-Retention (ZDR), EEA region pinning (eu-west-1 / eu-central-1), and upstream foundation-model IP indemnity directly in CI/CD pipelines.</p>
         </div>
       </div>
     </div>
@@ -484,60 +450,78 @@
   <!-- ComplyBridge Work -->
   <section id="work" style="background: white;">
     <div class="container">
-      <h2 class="section-title">ComplyBridge AI Governance Kit</h2>
+      <h2 class="section-title">ComplyBridge AI Governance Suite</h2>
       <p class="section-subtitle">
         Independent advisory work | March 2025 – November 2026<br>
-        Five practical, ready-to-use governance toolkits for mid-sized Indian SaaS and GCCs.
+        Modular governance toolkits, regulated FinTech case studies, and an interactive Policy-as-Code Control Plane.
       </p>
 
       <div class="kits">
         <table>
           <thead>
             <tr>
-              <th>Kit</th>
+              <th>Artefact / Kit</th>
               <th>Window</th>
-              <th>Core Deliverables & Proof</th>
+              <th>Core Deliverables &amp; Proof</th>
               <th>Regulatory Anchor</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td><a href="https://github.com/Sashidhar2508/complybridge-ai-governance-kit/tree/main/Project-01-AI-System-Inventory-and-Classifier" target="_blank">Kit 01: Inventory & Classifier</a></td>
+              <td><a href="https://github.com/Sashidhar2508/complybridge-ai-governance-kit/tree/main/Project-01-AI-System-Inventory-and-Classifier" target="_blank">Kit 01: Inventory &amp; Classifier</a></td>
               <td class="kit-window">Mar–Jun 2025</td>
-              <td>10-column register, classification guide, Hyderabad SaaS case study & decision log</td>
+              <td>10-column register, classification guide, Hyderabad SaaS case study &amp; decision log</td>
               <td>EU AI Act Art. 4/5/6 + Annex III, NIST RMF, DPDP</td>
             </tr>
             <tr>
-              <td><a href="https://github.com/Sashidhar2508/complybridge-ai-governance-kit/tree/main/Project-02-Client-AI-Evidence-and-Risk-Pack" target="_blank">Kit 02: Evidence & Risk Pack</a></td>
+              <td><a href="https://github.com/Sashidhar2508/complybridge-ai-governance-kit/tree/main/Project-02-Client-AI-Evidence-and-Risk-Pack" target="_blank">Kit 02: Evidence &amp; Risk Pack</a></td>
               <td class="kit-window">Jul–Oct 2025</td>
               <td>48-hour buyer evidence pack, HR screener example, Frankfurt bank case study</td>
               <td>EU AI Act Art. 14/26/50, ISO 42001, GDPR/DPDP</td>
             </tr>
             <tr>
-              <td><a href="https://github.com/Sashidhar2508/complybridge-ai-governance-kit/tree/main/Project-03-Third-Party-AI-and-GPAI-Vendor-Due-Diligence" target="_blank">Kit 03: Vendor & GPAI Due Diligence</a></td>
+              <td><a href="https://github.com/Sashidhar2508/complybridge-ai-governance-kit/tree/main/Project-03-Third-Party-AI-and-GPAI-Vendor-Due-Diligence" target="_blank">Kit 03: Vendor &amp; GPAI Due Diligence</a></td>
               <td class="kit-window">Nov 2025–Feb 2026</td>
-              <td>Upstream LLM scorecard, ZDR & patent indemnity clauses, vendor audit case study</td>
-              <td>EU GPAI Chapter V, Patent Novelty & IP Indemnity</td>
+              <td>Upstream LLM scorecard, ZDR &amp; patent indemnity clauses, vendor audit case study</td>
+              <td>EU GPAI Chapter V, Patent Novelty &amp; IP Indemnity</td>
             </tr>
             <tr>
-              <td><a href="https://github.com/Sashidhar2508/complybridge-ai-governance-kit/tree/main/Project-04-Model-Card-and-Article-50-Transparency-Pack" target="_blank">Kit 04: Model Card & Transparency</a></td>
+              <td><a href="https://github.com/Sashidhar2508/complybridge-ai-governance-kit/tree/main/Project-04-Model-Card-and-Article-50-Transparency-Pack" target="_blank">Kit 04: Model Card &amp; Transparency</a></td>
               <td class="kit-window">Mar–Jul 2026</td>
               <td>Standardized Model Card with patent/license attribution, Art. 50 banners, C2PA checks</td>
               <td>EU AI Act Art. 50, India IT Rules 2026</td>
             </tr>
             <tr>
-              <td><a href="https://github.com/Sashidhar2508/complybridge-ai-governance-kit/tree/main/Project-05-Lightweight-AI-GovOps-and-Incident-Playbook" target="_blank">Kit 05: GovOps & Incident Playbook</a></td>
+              <td><a href="https://github.com/Sashidhar2508/complybridge-ai-governance-kit/tree/main/Project-05-Lightweight-AI-GovOps-and-Incident-Playbook" target="_blank">Kit 05: GovOps &amp; Incident Playbook</a></td>
               <td class="kit-window">Aug–Nov 2026</td>
               <td>Bias/drift review log, model-swap gates, 24-hour Sev-1 escalation SOP</td>
               <td>ISO 42001 Clauses 8–10, NIST RMF Manage</td>
+            </tr>
+            <tr>
+              <td><a href="https://github.com/Sashidhar2508/complybridge-ai-governance-kit/tree/main/Case-Study-03-Dublin-IFSC-FinTech-EU-AI-Act-GDPR-DORA" target="_blank">Case Study 03: Dublin IFSC FinTech Audit</a></td>
+              <td class="kit-window">Oct–Nov 2026</td>
+              <td>EmeraldPay Dublin IFSC credit/fraud triage audit, Decision Log DEC-016 &amp; DORA xBRL-CSV RoI</td>
+              <td>EU AI Act Annex III 5(b), GDPR Art. 22/35 (Irish DPC), DORA</td>
+            </tr>
+            <tr>
+              <td>
+                <a href="control-plane.html">Kit 06: AI Governance Control Plane</a>
+                <span class="live-pill">LIVE INTERACTIVE</span>
+              </td>
+              <td class="kit-window">Nov 2026–Present</td>
+              <td>Interactive Regulatory Blast-Radius Simulator + OPA/Rego policies &amp; GitHub Actions CI/CD gates</td>
+              <td>EU AI Act (Omnibus 2026/1744), DORA, GDPR, ISO 42001</td>
             </tr>
           </tbody>
         </table>
       </div>
 
-      <div style="text-align: center; margin-top: 2rem;">
-        <a href="https://github.com/Sashidhar2508/complybridge-ai-governance-kit" class="btn btn-primary" target="_blank" style="display: inline-flex;">
-          Open Full GitHub Repository →
+      <div style="text-align: center; margin-top: 2rem; display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
+        <a href="control-plane.html" class="btn btn-emerald">
+          Launch Interactive Control Plane →
+        </a>
+        <a href="https://github.com/Sashidhar2508/complybridge-ai-governance-kit" class="btn btn-primary" target="_blank">
+          Open Full GitHub Repository ↗
         </a>
       </div>
     </div>
@@ -546,23 +530,24 @@
   <!-- Background -->
   <section id="background" class="bg-section">
     <div class="container">
-      <h2 class="section-title">Background</h2>
-      <p class="section-subtitle">Deep technical foundation + governance translation capability</p>
+      <h2 class="section-title">Background &amp; Credentials</h2>
+      <p class="section-subtitle">13+ years of enterprise infrastructure engineering + operational risk &amp; AI governance</p>
 
       <div class="bg-grid">
         <div>
           <ul class="bg-list">
-            <li>13+ years of enterprise client ownership and escalation governance across the US and India</li>
-            <li>Hands-on experience across cloud platforms (Oracle Cloud, AWS, Azure, GCP), middleware, and infrastructure</li>
-            <li>Proven ability to translate technical risk into language that Legal, Risk, and executive stakeholders understand</li>
-            <li>Currently focused on AI governance, regulatory readiness (EU AI Act, NIST AI RMF, ISO 42001, India DPDP), and Technical Account bridging</li>
+            <li>13+ years of hands-on Linux/Windows servers, networking, enterprise middleware (WebLogic, WebSphere), DevOps CI/CD, and multi-cloud delivery across the US and India</li>
+            <li>Led operational risk, SLA governance, change-control boards, DR audits, and root cause analysis (RCA) across 20+ global enterprise accounts (reducing recurring incidents by ~35%)</li>
+            <li>Executed zero-downtime enterprise identity migration (CA SiteMinder to OpenID Connect on OCI), saving $2M in licensing costs</li>
+            <li>Bridging engineering teams, Legal, DPOs, and enterprise buyers across EU AI Act, DORA, GDPR, ISO/IEC 42001, NIST AI RMF, and India DPDP</li>
           </ul>
         </div>
         <div class="credentials">
-          <h4>Credentials</h4>
-          <p>IAPP AI Governance Professional (AIGP) Candidate</p>
-          <p style="margin-top: 0.5rem;">Oracle Cloud Infrastructure 2025 Foundations & AI Associate</p>
-          <p style="margin-top: 0.5rem; font-weight: 500; color: var(--muted);">M.S. Computer Engineering — University of Houston-Clear Lake, USA</p>
+          <h4>Certifications &amp; Education</h4>
+          <p>IAPP AI Governance Professional (AIGP) — Candidate</p>
+          <p>Oracle Cloud Infrastructure 2025 Foundations &amp; AI Associate (Active)</p>
+          <p style="font-weight: 500; color: var(--muted);">AWS Certified Solutions Architect – Associate &amp; Certified IBM Infrastructure Specialist (Prior)</p>
+          <p style="margin-top: 0.75rem; font-weight: 500; color: var(--muted);">M.S. Computer Engineering — University of Houston-Clear Lake, USA</p>
         </div>
       </div>
     </div>
@@ -574,22 +559,21 @@
       <div class="contact-box">
         <h2>Let’s Talk</h2>
         <p>
-          If you are a SaaS founder, GCC leader, or risk/compliance professional facing enterprise AI due-diligence questions, I am open to focused discussions.
+          Open to AI Governance, Technology Risk, Customer Trust, and Technical Account Management (TAM) roles in Ireland / EU or remote advisory discussions.
         </p>
-        <a href="mailto:jssripadanna@outlook.com?subject=AI%20Governance%20Discussion" class="contact-email">
+        <a href="mailto:jssripadanna@outlook.com?subject=AI%20Governance%20%2F%20Risk%20Discussion" class="contact-email">
           jssripadanna@outlook.com
         </a>
         <div class="contact-meta">
-          Hyderabad, India · Open to Ireland / EU opportunities
+          Hyderabad, India · Open to Ireland / EU (Critical Skills Employment Permit Eligible)
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Footer -->
   <footer>
     <div class="container">
-      Sashidhar Sripadanna · Independent AI Governance & Technical Account Advisory · 2025–2026
+      Sashidhar Sripadanna · AI Governance &amp; Technical Account Bridge · 2025–2026
     </div>
   </footer>
 

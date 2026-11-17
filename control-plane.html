@@ -1,0 +1,1159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ComplyBridge AI Governance Control Plane | Live Policy-as-Code & Regulatory Blast-Radius Simulator</title>
+  <meta name="description" content="Interactive Enterprise AI Governance Control Plane & Regulatory Blast-Radius Simulator across EU AI Act, DORA, GDPR, ISO/IEC 42001, NIST AI RMF, and India DPDP." />
+  <style>
+    :root {
+      --bg: #070b14;
+      --surface: #0f172a;
+      --surface-2: #162033;
+      --border: #24324d;
+      --text: #f1f5f9;
+      --muted: #94a3b8;
+      --accent: #3b82f6;
+      --accent-glow: rgba(59, 130, 246, 0.22);
+      --green: #10b981;
+      --green-bg: rgba(16, 185, 129, 0.12);
+      --red: #ef4444;
+      --red-bg: rgba(239, 68, 68, 0.14);
+      --amber: #f59e0b;
+      --amber-bg: rgba(245, 158, 11, 0.14);
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    /* Top Command Bar */
+    .topbar {
+      background: rgba(15, 23, 42, 0.95);
+      border-bottom: 1px solid var(--border);
+      padding: 0.9rem 1.5rem;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(8px);
+    }
+
+    .topbar-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .brand-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 10px var(--green);
+    }
+
+    .brand h1 {
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+    }
+
+    .brand span {
+      display: block;
+      font-size: 0.75rem;
+      color: var(--muted);
+      font-weight: 400;
+    }
+
+    .top-actions {
+      display: flex;
+      gap: 0.65rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 0.5rem 0.95rem;
+      border-radius: 7px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: 1px solid var(--border);
+      background: var(--surface-2);
+      color: var(--text);
+      transition: all 0.15s ease;
+    }
+
+    .btn:hover { border-color: var(--accent); }
+
+    .btn-primary {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+    }
+
+    .btn-primary:hover { background: #2563eb; }
+
+    /* Regulatory Timeline Ticker */
+    .reg-strip {
+      background: #0b1221;
+      border-bottom: 1px solid var(--border);
+      padding: 0.65rem 1.5rem;
+    }
+
+    .reg-strip-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 0.75rem;
+    }
+
+    .reg-pill {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 7px;
+      padding: 0.45rem 0.75rem;
+      font-size: 0.76rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .tag-live {
+      background: var(--green-bg);
+      color: var(--green);
+      border: 1px solid rgba(16, 185, 129, 0.35);
+      padding: 0.12rem 0.45rem;
+      border-radius: 4px;
+      font-weight: 700;
+      font-size: 0.68rem;
+      white-space: nowrap;
+    }
+
+    .tag-cliff {
+      background: var(--amber-bg);
+      color: var(--amber);
+      border: 1px solid rgba(245, 158, 11, 0.35);
+      padding: 0.12rem 0.45rem;
+      border-radius: 4px;
+      font-weight: 700;
+      font-size: 0.68rem;
+      white-space: nowrap;
+    }
+
+    /* Main Container */
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 1.5rem;
+    }
+
+    .intro-banner {
+      background: linear-gradient(135deg, #0f172a 0%, #172554 100%);
+      border: 1px solid #1e3a8a;
+      border-radius: 12px;
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1.25rem;
+      flex-wrap: wrap;
+    }
+
+    .intro-banner h2 {
+      font-size: 1.2rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .intro-banner p {
+      font-size: 0.88rem;
+      color: #cbd5e1;
+      max-width: 820px;
+    }
+
+    /* Grid Layout */
+    .cockpit-grid {
+      display: grid;
+      grid-template-columns: 340px 1fr;
+      gap: 1.25rem;
+      align-items: start;
+    }
+
+    @media (max-width: 960px) {
+      .cockpit-grid { grid-template-columns: 1fr; }
+    }
+
+    .panel {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.15rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .panel-title {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      font-weight: 700;
+      margin-bottom: 0.85rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    /* System Selector Cards */
+    .sys-card {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      padding: 0.8rem 0.9rem;
+      margin-bottom: 0.65rem;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .sys-card:hover { border-color: var(--accent); }
+
+    .sys-card.active {
+      border-color: var(--accent);
+      background: rgba(37, 99, 235, 0.14);
+      box-shadow: 0 0 0 1px var(--accent);
+    }
+
+    .sys-card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.25rem;
+    }
+
+    .sys-id {
+      font-family: var(--mono);
+      font-size: 0.74rem;
+      font-weight: 700;
+      color: #93c5fd;
+    }
+
+    .sys-tier {
+      font-size: 0.68rem;
+      font-weight: 700;
+      padding: 0.12rem 0.45rem;
+      border-radius: 4px;
+      background: rgba(148, 163, 184, 0.16);
+      color: #e2e8f0;
+    }
+
+    .sys-name {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 0.2rem;
+    }
+
+    .sys-meta {
+      font-size: 0.74rem;
+      color: var(--muted);
+    }
+
+    /* Chaos Fault Injector Buttons */
+    .fault-btn {
+      width: 100%;
+      text-align: left;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.68rem 0.85rem;
+      margin-bottom: 0.55rem;
+      color: var(--text);
+      cursor: pointer;
+      transition: all 0.15s ease;
+      display: block;
+    }
+
+    .fault-btn:hover { border-color: var(--amber); }
+
+    .fault-btn.active-clean {
+      border-color: var(--green);
+      background: var(--green-bg);
+    }
+
+    .fault-btn.active-fault {
+      border-color: var(--red);
+      background: var(--red-bg);
+    }
+
+    .fault-label {
+      font-size: 0.8rem;
+      font-weight: 700;
+      display: block;
+      margin-bottom: 0.15rem;
+    }
+
+    .fault-desc {
+      font-size: 0.73rem;
+      color: var(--muted);
+      display: block;
+    }
+
+    /* Right Workspace Status Banner */
+    .verdict-box {
+      border-radius: 12px;
+      padding: 1.2rem 1.35rem;
+      margin-bottom: 1.25rem;
+      border: 1px solid;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .verdict-pass {
+      background: var(--green-bg);
+      border-color: rgba(16, 185, 129, 0.45);
+    }
+
+    .verdict-fail {
+      background: var(--red-bg);
+      border-color: rgba(239, 68, 68, 0.55);
+    }
+
+    .verdict-badge {
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      font-weight: 800;
+      padding: 0.35rem 0.75rem;
+      border-radius: 6px;
+      letter-spacing: 0.04em;
+    }
+
+    .verdict-pass .verdict-badge { background: var(--green); color: #052e16; }
+    .verdict-fail .verdict-badge { background: var(--red); color: #fff; }
+
+    /* KPI Exposure Strip */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      gap: 0.85rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .kpi-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 0.9rem 1rem;
+    }
+
+    .kpi-lbl {
+      font-size: 0.72rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 0.3rem;
+    }
+
+    .kpi-val {
+      font-size: 1.05rem;
+      font-weight: 800;
+      font-family: var(--mono);
+    }
+
+    /* Tabs */
+    .tabs {
+      display: flex;
+      gap: 0.5rem;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .tab-btn {
+      background: transparent;
+      border: none;
+      border-bottom: 2px solid transparent;
+      color: var(--muted);
+      padding: 0.6rem 0.9rem;
+      font-size: 0.84rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .tab-btn.active {
+      color: #60a5fa;
+      border-bottom-color: #60a5fa;
+    }
+
+    .tab-pane { display: none; }
+    .tab-pane.active { display: block; }
+
+    /* Telemetry & Violations */
+    .arch-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+    }
+
+    .arch-item {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.75rem;
+    }
+
+    .arch-item span {
+      display: block;
+      font-size: 0.71rem;
+      color: var(--muted);
+      margin-bottom: 0.2rem;
+    }
+
+    .arch-item strong {
+      font-size: 0.84rem;
+      font-family: var(--mono);
+    }
+
+    .violation-card {
+      background: rgba(239, 68, 68, 0.1);
+      border-left: 4px solid var(--red);
+      border-radius: 6px;
+      padding: 0.85rem 1rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .violation-card h4 {
+      font-size: 0.86rem;
+      color: #fca5a5;
+      margin-bottom: 0.25rem;
+    }
+
+    .violation-card p {
+      font-size: 0.82rem;
+      color: #e2e8f0;
+    }
+
+    .remediation-box {
+      background: rgba(16, 185, 129, 0.08);
+      border: 1px solid rgba(16, 185, 129, 0.35);
+      border-radius: 8px;
+      padding: 0.95rem 1rem;
+      margin-top: 0.85rem;
+    }
+
+    .remediation-box h4 {
+      font-size: 0.84rem;
+      color: var(--green);
+      margin-bottom: 0.35rem;
+    }
+
+    .remediation-box p, .remediation-box li {
+      font-size: 0.82rem;
+      color: #cbd5e1;
+    }
+
+    .remediation-box ul {
+      margin-left: 1.2rem;
+      margin-top: 0.35rem;
+    }
+
+    /* Rego Code Viewer */
+    pre.code-block {
+      background: #050811;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem;
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      color: #e2e8f0;
+      overflow-x: auto;
+      line-height: 1.55;
+    }
+
+    /* Control Matrix Table */
+    .filter-bar {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 0.85rem;
+      flex-wrap: wrap;
+    }
+
+    .filter-chip {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      padding: 0.35rem 0.7rem;
+      border-radius: 6px;
+      font-size: 0.76rem;
+      cursor: pointer;
+    }
+
+    .filter-chip.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.79rem;
+    }
+
+    th {
+      background: var(--surface-2);
+      text-align: left;
+      padding: 0.7rem 0.8rem;
+      color: #93c5fd;
+      border-bottom: 1px solid var(--border);
+      white-space: nowrap;
+    }
+
+    td {
+      padding: 0.7rem 0.8rem;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+      color: #cbd5e1;
+    }
+
+    tr:last-child td { border-bottom: none; }
+
+    footer {
+      text-align: center;
+      padding: 2rem 1rem;
+      color: var(--muted);
+      font-size: 0.8rem;
+      border-top: 1px solid var(--border);
+      margin-top: 2rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navigation -->
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <div class="brand-dot" id="liveLed"></div>
+        <div>
+          <h1>ComplyBridge AI Governance Control Plane (Project 06)</h1>
+          <span>Policy-as-Code Enforcement &amp; Multi-Regime Regulatory Blast-Radius Simulator · Zero Localhost</span>
+        </div>
+      </div>
+      <div class="top-actions">
+        <a href="index.html" class="btn">← Back to Portfolio</a>
+        <a href="https://github.com/Sashidhar2508/complybridge-ai-governance-kit/tree/main/Project-06-AI-Governance-Control-Plane-and-Policy-Engine" target="_blank" class="btn">GitHub OPA / Rego Repo ↗</a>
+        <button class="btn btn-primary" onclick="downloadAuditDossier()">Download Signed Audit Dossier (.md)</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Live 2026 Regulatory Enforcement Ticker -->
+  <div class="reg-strip">
+    <div class="reg-strip-inner">
+      <div class="reg-pill">
+        <span><strong>DORA Reg. (EU) 2022/2554</strong> (CBI xBRL-CSV RoI)</span>
+        <span class="tag-live">ENFORCED</span>
+      </div>
+      <div class="reg-pill">
+        <span><strong>EU AI Act Art. 5 &amp; Art. 50(1)</strong> (Transparency)</span>
+        <span class="tag-live">ENFORCED (2 AUG 2026)</span>
+      </div>
+      <div class="reg-pill">
+        <span><strong>EU AI Act Art. 50(2)</strong> (C2PA Synthetic Marking)</span>
+        <span class="tag-cliff">CLIFF: 2 DEC 2026</span>
+      </div>
+      <div class="reg-pill">
+        <span><strong>EU AI Act Annex III</strong> (Reg. (EU) 2026/1744)</span>
+        <span class="tag-cliff">DEADLINE: 2 DEC 2027</span>
+      </div>
+    </div>
+  </div>
+
+  <main class="container">
+    <!-- Executive Framing Banner -->
+    <section class="intro-banner">
+      <div>
+        <h2>Why Enterprises Fail AI Audits Without a Governance-Engineering Bridge</h2>
+        <p>
+          Select any enterprise AI system on the left, then inject a real-world <strong>DevOps configuration drift</strong> or <strong>product shortcut</strong>. Watch how a single engineering change cascades across <strong>EU AI Act, DORA (Central Bank of Ireland), GDPR (Irish DPC), ISO/IEC 42001, and India DPDP</strong>—and how Open Policy Agent (OPA) release gates block non-compliant deployments before they reach production.
+        </p>
+      </div>
+    </section>
+
+    <div class="cockpit-grid">
+      <!-- Left Column: System Inventory + Chaos Fault Injector -->
+      <aside>
+        <div class="panel">
+          <div class="panel-title">
+            <span>1. Production AI System Inventory</span>
+            <span>4 SYSTEMS</span>
+          </div>
+          <div id="systemList"></div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-title">
+            <span>2. Inject Engineering / Audit Drift</span>
+            <span>SIMULATOR</span>
+          </div>
+          <div id="faultList"></div>
+        </div>
+      </aside>
+
+      <!-- Right Column: Live Control Plane & Policy Inspection -->
+      <section>
+        <!-- Release Gate Verdict Banner -->
+        <div id="verdictBox" class="verdict-box verdict-pass">
+          <div>
+            <div style="font-size:0.75rem; text-transform:uppercase; letter-spacing:0.05em; opacity:0.85; font-weight:700;" id="verdictSystemLabel"></div>
+            <h3 style="font-size:1.15rem; margin-top:0.15rem;" id="verdictHeadline"></h3>
+            <p style="font-size:0.83rem; margin-top:0.2rem; opacity:0.9;" id="verdictSubtext"></p>
+          </div>
+          <span class="verdict-badge" id="verdictBadge">RELEASE CLEARED</span>
+        </div>
+
+        <!-- KPI Exposure Cards -->
+        <div class="kpi-grid">
+          <div class="kpi-card">
+            <div class="kpi-lbl">Max Statutory Fine Exposure</div>
+            <div class="kpi-val" id="kpiFine">€0 (Compliant)</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-lbl">Active Gate Violations</div>
+            <div class="kpi-val" id="kpiViolations">0 / 14 Controls</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-lbl">Inference Residency &amp; ZDR</div>
+            <div class="kpi-val" id="kpiResidency">eu-west-1 · ZDR ON</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-lbl">Enterprise Procurement Status</div>
+            <div class="kpi-val" id="kpiDeal">48-Hr Buyer Ready</div>
+          </div>
+        </div>
+
+        <!-- Workspace Tabs -->
+        <div class="panel">
+          <div class="tabs">
+            <button class="tab-btn active" onclick="switchTab('tab-blast', this)">Regulatory Blast-Radius &amp; Remediation</button>
+            <button class="tab-btn" onclick="switchTab('tab-rego', this)">Live OPA / Rego Policy Evaluation</button>
+            <button class="tab-btn" onclick="switchTab('tab-matrix', this)">Cross-Framework Control Matrix (14 Core Gates)</button>
+          </div>
+
+          <!-- Tab 1: Regulatory Blast-Radius & Remediation -->
+          <div id="tab-blast" class="tab-pane active">
+            <div class="arch-grid" id="archGrid"></div>
+            <div id="blastContent"></div>
+          </div>
+
+          <!-- Tab 2: Live OPA / Rego Policy Evaluation -->
+          <div id="tab-rego" class="tab-pane">
+            <p style="font-size:0.82rem; color:var(--muted); margin-bottom:0.75rem;">
+              Real-time evaluation output from <code>policies/eu_ai_act.rego</code>, <code>policies/dora_resilience.rego</code>, and <code>policies/gdpr_dpdp_privacy.rego</code> (executed automatically in GitHub Actions via <code>opa eval --fail-defined</code>):
+            </p>
+            <pre class="code-block" id="regoOutput"></pre>
+          </div>
+
+          <!-- Tab 3: Cross-Framework Control Matrix -->
+          <div id="tab-matrix" class="tab-pane">
+            <div class="filter-bar">
+              <button class="filter-chip active" onclick="filterMatrix('ALL', this)">All Frameworks (14)</button>
+              <button class="filter-chip" onclick="filterMatrix('EU AI Act', this)">EU AI Act</button>
+              <button class="filter-chip" onclick="filterMatrix('DORA', this)">DORA / Central Bank of Ireland</button>
+              <button class="filter-chip" onclick="filterMatrix('GDPR', this)">GDPR / Irish DPC</button>
+              <button class="filter-chip" onclick="filterMatrix('DPDP', this)">India DPDP / IT Rules 2026</button>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Control Domain</th>
+                    <th>EU AI Act (2024/1689 + Omnibus 2026/1744)</th>
+                    <th>DORA (Reg. 2022/2554)</th>
+                    <th>GDPR / Irish DPC</th>
+                    <th>ISO 42001 / NIST RMF</th>
+                    <th>India DPDP</th>
+                  </tr>
+                </thead>
+                <tbody id="matrixBody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    Sashidhar Sripadanna · AI Governance &amp; Technical Account Bridge · 13+ Yrs Cloud, DevOps &amp; Enterprise Infrastructure Engineering · Hyderabad, India (Open to Ireland / EU)
+  </footer>
+
+  <script>
+    const SYSTEMS = [
+      {
+        id: "SYS-01",
+        code: "FF-06",
+        name: "Dublin IFSC SME Credit & Fraud Triage Engine",
+        tier: "HIGH-RISK · ANNEX III 5(b)",
+        sector: "EmeraldPay Financial Technologies DAC (Central Bank of Ireland Supervised)",
+        role: "Deployer & High-Risk Customizer",
+        model: "Claude 3.5 Sonnet (AWS Bedrock EEA Profile)",
+        regions: "eu-west-1 (Dublin), eu-central-1 (Frankfurt)",
+        zdr: "ENFORCED (Contractual + API)",
+        oversight: "Mandatory Art. 14 Human Underwriter Sign-Off",
+        regimes: "EU AI Act Annex III 5(b) · DORA Reg. 2022/2554 · GDPR Art. 22/35 (Irish DPC)"
+      },
+      {
+        id: "SYS-02",
+        code: "HR-04",
+        name: "Enterprise Talent & Interview Scoring Copilot",
+        tier: "HIGH-RISK · ANNEX III 4(a)",
+        sector: "Enterprise SaaS & Global Capability Centre (GCC) Workforce Operations",
+        role: "Deployer",
+        model: "GPT-4o (Azure OpenAI EU Data Zone)",
+        regions: "eu-west-1 (Dublin), eu-central-1 (Frankfurt)",
+        zdr: "ENFORCED (Zero-Logging Exemption)",
+        oversight: "Human Recruiter Shortlist Sign-Off + Art. 26(7) Notice",
+        regimes: "EU AI Act Annex III 4(a) · Art. 27 FRIA · Art. 4a Bias Audit · GDPR Art. 35"
+      },
+      {
+        id: "SYS-03",
+        code: "VF-02",
+        name: "Multi-Tenant B2B Customer Support RAG Assistant",
+        tier: "LIMITED RISK · ART. 50(1) LIVE",
+        sector: "Enterprise B2B Cloud SaaS (EU & India Customers)",
+        role: "Provider",
+        model: "Claude 3.5 Sonnet (AWS Bedrock)",
+        regions: "eu-west-1, eu-central-1, ap-south-1",
+        zdr: "ENFORCED (No Upstream Training)",
+        oversight: "Upfront Art. 50(1) Banner + 1-Click Human Escalation",
+        regimes: "EU AI Act Art. 50(1) (Live 2 Aug 2026) · GDPR Art. 28 · India DPDP Act"
+      },
+      {
+        id: "SYS-04",
+        code: "LG-09",
+        name: "M&A Due-Diligence & Synthetic Memo Generator",
+        tier: "SYNTHETIC · ART. 50(2) CLIFF",
+        sector: "Corporate Legal & Advisory Workflows (EU & UK)",
+        role: "Provider / Internal Deployer",
+        model: "Cohere Command R+ (OCI eu-frankfurt-1)",
+        regions: "eu-central-1 (Frankfurt)",
+        zdr: "ENFORCED (Dedicated OCI Cluster)",
+        oversight: "C2PA Cryptographic Watermark + Legal Counsel Review",
+        regimes: "EU AI Act Art. 50(2) (2 Dec 2026 Cliff) · Chapter V GPAI · GDPR Art. 35"
+      }
+    ];
+
+    const FAULTS = [
+      {
+        id: "CLEAN",
+        label: "0. Baseline: All Governance Gates Verified",
+        desc: "Clean production state — OPA Rego & CI/CD gates pass across all regimes.",
+        fine: "€0 (Compliant)",
+        deal: "48-Hr Buyer Ready",
+        residencyOverride: null,
+        violations: [],
+        remediation: [
+          "All 14 core regulatory checkpoints verified in CI/CD (.github/workflows/ai-governance-gate.yml).",
+          "Signed SHA-256 audit evidence dossier generated and ready for Central Bank of Ireland, Irish DPC, or enterprise CISO review."
+        ]
+      },
+      {
+        id: "DRIFT_ZDR_REGION",
+        label: "1. DevOps Drift: Failover Routes to Non-ZDR us-east-1",
+        desc: "Platform engineer updates Terraform failover endpoint without ZDR flag or EEA SCP lock.",
+        fine: "€20,000,000 or 4% Turnover",
+        deal: "BLOCKED (DPA Breach)",
+        residencyOverride: "us-east-1 · ZDR OFF",
+        violations: [
+          {
+            title: "GDPR Art. 28 & Art. 44 Cross-Border Transfer Breach (Irish DPC Enforcement)",
+            detail: "Customer financial/personal prompts routed to unapproved US region (us-east-1) without Standard Contractual Clauses or Transfer Impact Assessment, while disabling Zero-Data-Retention allows upstream vendor logging."
+          },
+          {
+            title: "DORA Art. 28(3) Register of Information & Art. 30(2)(b) Location Breach",
+            detail: "Live cloud routing contradicts the xBRL-CSV Register of Information filed with the Central Bank of Ireland, creating an unauthorized ICT sub-outsourcing footprint."
+          },
+          {
+            title: "India DPDP Act Sec. 8(5) & Sec. 16 Security Safeguard Failure",
+            detail: "Unencrypted prompt retention on third-party inference infrastructure invalidates enterprise buyer security representations."
+          }
+        ],
+        remediation: [
+          "Infrastructure Fix (Cloud/IAM): Enforce AWS Organizations Service Control Policy (SCP) denying bedrock:InvokeModel outside eu-west-1 and eu-central-1.",
+          "Governance-as-Code Gate: policies/gdpr_dpdp_privacy.rego fails CI/CD build immediately when zero_data_retention_zdr != true or non-EEA region appears in Terraform/manifest."
+        ]
+      },
+      {
+        id: "AUTO_DECLINE",
+        label: "2. Product Shortcut: Autonomous Credit / Candidate Rejection",
+        desc: "Product manager enables auto-decline below 0.45 score to reduce human review queue.",
+        fine: "€15,000,000 or 3% Turnover",
+        deal: "BLOCKED (Annex III / Art. 22)",
+        residencyOverride: null,
+        violations: [
+          {
+            title: "GDPR Article 22 Unlawful Solely Automated Decision-Making",
+            detail: "Sole-trader SME loan applicants and job candidates are natural persons under GDPR. Automated rejection without meaningful human intervention and contestability is unlawful."
+          },
+          {
+            title: "EU AI Act Annex III (5(b) / 4(a)) & Article 14 Human Oversight Failure",
+            detail: "High-risk AI systems must be designed so natural persons can effectively oversee outputs and override decisions. Removing the human sign-off gate violates Art. 14 and invalidates the Art. 27 FRIA."
+          },
+          {
+            title: "DORA Article 9 Operational Control & Model Governance Breach",
+            detail: "Unbounded automated credit decisions introduce unmitigated operational and conduct risk under Central Bank of Ireland supervision."
+          }
+        ],
+        remediation: [
+          "Application Architecture Fix: Lock runtime output enum to advisory states only (RECOMMEND_PRE_APPROVAL_HUMAN_SIGN_OFF or ESCALATE_HUMAN_UNDERWRITER_NO_AUTO_DECLINE).",
+          "Governance-as-Code Gate: policies/eu_ai_act.rego & gdpr_dpdp_privacy.rego enforce art14_human_oversight_hard_stop == true and automated_adverse_decision_prohibited == true."
+        ]
+      },
+      {
+        id: "DEC2_ART50_CLIFF",
+        label: "3. 2 Dec 2026 Cliff: Synthetic Content Ships Without Watermark",
+        desc: "Generative memo/chat feature ships after 2 Dec 2026 grace period without C2PA marking.",
+        fine: "€15,000,000 or 3% Turnover",
+        deal: "BLOCKED (Art. 50 Non-Compliant)",
+        residencyOverride: null,
+        violations: [
+          {
+            title: "EU AI Act Article 50(2) Synthetic Content Marking Violation (Grace Period Ends 2 Dec 2026)",
+            detail: "Transitional grace period for pre-existing generative AI systems expires 2 December 2026. Outputs must be marked in a machine-readable format (C2PA / cryptographic watermark) as artificially generated or manipulated."
+          },
+          {
+            title: "EU AI Act Article 50(1) Interactive Disclosure Violation (Enforced since 2 Aug 2026)",
+            detail: "Users interacting with AI assistants must receive clear, upfront notification at first interaction unless obvious from context."
+          }
+        ],
+        remediation: [
+          "Pipeline Fix: Inject C2PA manifest signing and machine-readable metadata headers into all generated documents/responses, plus non-dismissible Art. 50(1) UI banner.",
+          "Governance-as-Code Gate: policies/eu_ai_act.rego blocks any system where generates_synthetic_content == true and art50_2_c2pa_watermarking != true."
+        ]
+      },
+      {
+        id: "DORA_EXIT_GAP",
+        label: "4. Vendor Contract Gap: Missing DORA Art. 30 CBI Audit & Exit Plan",
+        desc: "Procurement signs standard commercial LLM terms without Central Bank of Ireland audit rights.",
+        fine: "CBI Supervisory Sanction + 2% Periodic Penalty",
+        deal: "BLOCKED (IFSC Bank Audit Fail)",
+        residencyOverride: null,
+        violations: [
+          {
+            title: "DORA Article 30(2)(e) Missing Regulatory Inspection & Audit Rights",
+            detail: "Contracts supporting critical/important financial functions must grant unrestricted audit, inspection, and access rights to the financial entity and the Central Bank of Ireland."
+          },
+          {
+            title: "DORA Article 28(8) Untested Exit Strategy & Concentration Risk",
+            detail: "Relying on a single foundation model without a tested deterministic fallback or 30-day model portability plan violates DORA ICT concentration-risk rules."
+          },
+          {
+            title: "DORA Article 19 Major ICT Incident Reporting Risk (4-Hour CBI Window)",
+            detail: "Standard 24-hour vendor support SLAs prevent the financial entity from submitting its initial DORA Art. 19 notification to the Central Bank of Ireland within 4 hours of incident classification."
+          }
+        ],
+        remediation: [
+          "Contractual & Legal Fix: Execute AWS/Cloud Financial Services DORA Addendum (2-hour incident SLA + CBI audit rights) and update DORA Art. 28 xBRL-CSV Register of Information.",
+          "Engineering Resilience Fix: Maintain a tested 15-minute deterministic rule-based fallback engine and document a 30-day multi-model exit runbook."
+        ]
+      },
+      {
+        id: "HR_PROXY_BIAS",
+        label: "5. Bias & FRIA Drift: Eircode / Prestige Proxies Fed to Model",
+        desc: "Data pipeline feeds raw candidate Eircode/postcode and university prestige into scoring prompt.",
+        fine: "€15,000,000 or 3% Turnover",
+        deal: "BLOCKED (Art. 10 / FRIA Fail)",
+        residencyOverride: null,
+        violations: [
+          {
+            title: "EU AI Act Article 10(2)(f) & Annex III Data Governance / Proxy Bias Breach",
+            detail: "Training/inference datasets for creditworthiness and recruitment must be examined for biases likely to affect fundamental rights or lead to discrimination prohibited under Union law."
+          },
+          {
+            title: "EU AI Act Article 27 FRIA & GDPR Article 35 DPIA Invalidation",
+            detail: "Introducing unapproved geographic or demographic proxy variables invalidates the signed Fundamental Rights Impact Assessment and Irish DPC DPIA."
+          }
+        ],
+        remediation: [
+          "Pre-Inference Guardrail Fix: Enable deterministic regex/NER scrubbing (protected_proxy_filtering: true) to strip Eircode, nationality, gender, and age proxies prior to LLM tokenization.",
+          "Governance Fix: Conduct quarterly bias-drift testing under EU AI Act Art. 4a special-category bias-correction safeguards and re-sign Art. 27 FRIA."
+        ]
+      }
+    ];
+
+    const CONTROLS = [
+      ["CTL-01", "Inventory & Role Scoping", "Art. 3, 6 & 49", "Art. 28(3) RoI", "Art. 30 RoPA", "Cl. 4.1 / MAP 1.1", "DPDP Sec. 8"],
+      ["CTL-02", "Prohibited Practice Screen", "Art. 5 (EUR 35M / 7%)", "Art. 5 Governance", "Art. 5(1)(a)", "Cl. 6.1.2 / GOV 1.3", "IT Rules 2026"],
+      ["CTL-03", "Upfront AI Interaction Notice", "Art. 50(1) (Live 2 Aug 2026)", "Art. 14 Comm.", "Art. 13 / 14", "A.8.2 / MAP 2.2", "IT Rules 2026"],
+      ["CTL-04", "Synthetic Content Marking", "Art. 50(2) (Cliff 2 Dec 2026)", "Art. 9 Integrity", "Art. 5(1)(d)", "A.8.3 / MEAS 2.7", "IT Rules 2026"],
+      ["CTL-05", "Human-in-the-Loop Hard Stop", "Art. 14 & Annex III", "Art. 9(4) Control", "Art. 22(3) Rights", "A.9.3 / MAN 2.2", "DPDP Sec. 11"],
+      ["CTL-06", "Fundamental Rights Impact", "Art. 27 FRIA", "Art. 6 Risk Mgmt", "Art. 35 Irish DPC DPIA", "Cl. 6.1.4 / MAP 3.4", "DPDP Sec. 10"],
+      ["CTL-07", "Zero-Data-Retention (ZDR)", "Art. 10 & 53", "Art. 30(2) Security", "Art. 28 Processor", "A.7.4 / GOV 6.1", "DPDP Sec. 8(5)"],
+      ["CTL-08", "EEA Region Pinning (SCP)", "Art. 15 Robustness", "Art. 30(2)(b) Location", "Art. 44 Transfers", "A.7.5 / MAP 2.3", "DPDP Sec. 16"],
+      ["CTL-09", "Pre-Inference PII Redaction", "Art. 10(5) Privacy", "Art. 9(2) Protection", "Art. 25 & 32", "A.7.3 / MEAS 2.10", "DPDP Sec. 8(5)"],
+      ["CTL-10", "Proxy-Bias & Fairness Filter", "Art. 10(2)(f) & Art. 4a", "Art. 6 ICT Risk", "Art. 5(1)(a) Fairness", "A.6.2.4 / MEAS 2.11", "Art. 15 Equality"],
+      ["CTL-11", "DORA xBRL-CSV Register", "Art. 26(6) Logs", "Art. 28(3) CBI Portal", "Art. 28(4) Sub-proc.", "A.10.2 / GOV 6.2", "RBI/SEBI ICT"],
+      ["CTL-12", "DORA Audit & 30-Day Exit", "Art. 26(1) Supplier", "Art. 28(8) & 30(2)(e)", "Art. 28(3)(h)", "A.10.3 / MAN 4.1", "DPDP Sec. 8(7)"],
+      ["CTL-13", "4-Hr Major Incident SLA", "Art. 73 Serious Inc.", "Art. 17–23 CBI SLA", "Art. 33 (72h DPC)", "A.8.4 / MAN 4.2", "CERT-In 6h"],
+      ["CTL-14", "Immutable CI/CD Audit Trail", "Art. 12 & 19 Logs", "Art. 12 Record-Keep", "Art. 5(2) & 30", "Cl. 9.1 / MEAS 2.8", "DPDP Sec. 8"]
+    ];
+
+    let selectedSystemIdx = 0;
+    let selectedFaultIdx = 0;
+
+    function renderLeftSidebar() {
+      const sysContainer = document.getElementById("systemList");
+      sysContainer.innerHTML = "";
+      SYSTEMS.forEach((s, idx) => {
+        const div = document.createElement("div");
+        div.className = "sys-card" + (idx === selectedSystemIdx ? " active" : "");
+        div.onclick = () => { selectedSystemIdx = idx; renderAll(); };
+        div.innerHTML = `
+          <div class="sys-card-top">
+            <span class="sys-id">${s.id} (${s.code})</span>
+            <span class="sys-tier">${s.tier}</span>
+          </div>
+          <div class="sys-name">${s.name}</div>
+          <div class="sys-meta">${s.regimes}</div>
+        `;
+        sysContainer.appendChild(div);
+      });
+
+      const faultContainer = document.getElementById("faultList");
+      faultContainer.innerHTML = "";
+      FAULTS.forEach((f, idx) => {
+        const btn = document.createElement("button");
+        let cls = "fault-btn";
+        if (idx === selectedFaultIdx) {
+          cls += idx === 0 ? " active-clean" : " active-fault";
+        }
+        btn.className = cls;
+        btn.onclick = () => { selectedFaultIdx = idx; renderAll(); };
+        btn.innerHTML = `
+          <span class="fault-label">${f.label}</span>
+          <span class="fault-desc">${f.desc}</span>
+        `;
+        faultContainer.appendChild(btn);
+      });
+    }
+
+    function renderWorkspace() {
+      const sys = SYSTEMS[selectedSystemIdx];
+      const fault = FAULTS[selectedFaultIdx];
+      const isClean = fault.id === "CLEAN";
+
+      // LED & Verdict Banner
+      const led = document.getElementById("liveLed");
+      led.style.background = isClean ? "var(--green)" : "var(--red)";
+      led.style.boxShadow = isClean ? "0 0 10px var(--green)" : "0 0 10px var(--red)";
+
+      const vbox = document.getElementById("verdictBox");
+      vbox.className = "verdict-box " + (isClean ? "verdict-pass" : "verdict-fail");
+      document.getElementById("verdictSystemLabel").innerText = `${sys.id} (${sys.code}) · ${sys.sector}`;
+      document.getElementById("verdictHeadline").innerText = isClean
+        ? `Production Release Cleared — ${sys.name}`
+        : `CI/CD RELEASE BLOCKED — ${fault.label}`;
+      document.getElementById("verdictSubtext").innerText = isClean
+        ? `All OPA/Rego policies verified across ${sys.regimes}.`
+        : `Detected ${fault.violations.length} high-severity statutory violations. Deployment halted (exit 1) prior to production.`;
+      document.getElementById("verdictBadge").innerText = isClean ? "OPA GATE: ALLOW" : "OPA GATE: DENY (EXIT 1)";
+
+      // KPIs
+      const kpiFine = document.getElementById("kpiFine");
+      kpiFine.innerText = fault.fine;
+      kpiFine.style.color = isClean ? "var(--green)" : "var(--red)";
+
+      const kpiViol = document.getElementById("kpiViolations");
+      kpiViol.innerText = isClean ? "0 / 14 Controls" : `${fault.violations.length} Critical Breaches`;
+      kpiViol.style.color = isClean ? "var(--green)" : "var(--red)";
+
+      const kpiRes = document.getElementById("kpiResidency");
+      kpiRes.innerText = fault.residencyOverride ? fault.residencyOverride : `${sys.regions.split(",")[0]} · ZDR ON`;
+      kpiRes.style.color = fault.residencyOverride ? "var(--red)" : "var(--text)";
+
+      const kpiDeal = document.getElementById("kpiDeal");
+      kpiDeal.innerText = fault.deal;
+      kpiDeal.style.color = isClean ? "var(--green)" : "var(--amber)";
+
+      // Architecture Telemetry Grid
+      document.getElementById("archGrid").innerHTML = `
+        <div class="arch-item"><span>EU AI Act Role &amp; Tier</span><strong>${sys.role} · ${sys.tier}</strong></div>
+        <div class="arch-item"><span>Upstream Foundation Model</span><strong>${sys.model}</strong></div>
+        <div class="arch-item"><span>Inference Residency &amp; ZDR</span><strong>${fault.residencyOverride || sys.regions + " · " + sys.zdr}</strong></div>
+        <div class="arch-item"><span>Human Oversight &amp; Provenance</span><strong>${sys.oversight}</strong></div>
+      `;
+
+      // Blast Content
+      const blast = document.getElementById("blastContent");
+      if (isClean) {
+        blast.innerHTML = `
+          <div class="remediation-box">
+            <h4>Verified Governance-Engineering Posture (Zero Active Violations)</h4>
+            <p>System <strong>${sys.id} (${sys.code})</strong> satisfies all machine-enforceable policy gates across <strong>${sys.regimes}</strong>.</p>
+            <ul>
+              ${fault.remediation.map(r => `<li>${r}</li>`).join("")}
+            </ul>
+          </div>
+        `;
+      } else {
+        blast.innerHTML = `
+          ${fault.violations.map(v => `
+            <div class="violation-card">
+              <h4>[OPA POLICY DENY] ${v.title}</h4>
+              <p>${v.detail}</p>
+            </div>
+          `).join("")}
+          <div class="remediation-box">
+            <h4>Required Engineering &amp; Governance Remediation (To Unblock Release)</h4>
+            <ul>
+              ${fault.remediation.map(r => `<li>${r}</li>`).join("")}
+            </ul>
+          </div>
+        `;
+      }
+
+      // Live OPA / Rego Evaluation Trace
+      const denyList = fault.violations.map(v => `    "${v.title}"`).join(",\n");
+      document.getElementById("regoOutput").innerText =
+`$ opa eval --format pretty -d policies/ -i manifests/${sys.id.toLowerCase()}.json "data.complybridge"
+
+{
+  "system_id": "${sys.id}",
+  "code_name": "${sys.code}",
+  "evaluated_at_utc": "${new Date().toISOString()}",
+  "simulated_scenario": "${fault.id}",
+  "eu_ai_act": {
+    "allow": ${isClean},
+    "enforced_milestones": ["Art.5_2025-02-02", "GPAI_2025-08-02", "Art.50_1_2026-08-02", "Art.50_2_Cliff_2026-12-02"]
+  },
+  "dora_cbi_supervision": {
+    "allow": ${isClean || (fault.id !== "DRIFT_ZDR_REGION" && fault.id !== "DORA_EXIT_GAP" && fault.id !== "AUTO_DECLINE")},
+    "xbrl_csv_roi_verified": ${fault.id !== "DRIFT_ZDR_REGION" && fault.id !== "DORA_EXIT_GAP"}
+  },
+  "gdpr_and_dpdp": {
+    "allow": ${isClean || (fault.id !== "DRIFT_ZDR_REGION" && fault.id !== "AUTO_DECLINE" && fault.id !== "HR_PROXY_BIAS")},
+    "zero_data_retention_zdr": ${fault.id !== "DRIFT_ZDR_REGION"}
+  },
+  "deny_reasons": [
+${denyList}
+  ],
+  "ci_cd_exit_code": ${isClean ? 0 : 1}
+}`;
+    }
+
+    function renderMatrix(filter = "ALL") {
+      const tbody = document.getElementById("matrixBody");
+      tbody.innerHTML = "";
+      CONTROLS.forEach(row => {
+        const joined = row.join(" ");
+        if (filter !== "ALL" && !joined.includes(filter)) return;
+        const tr = document.createElement("tr");
+        tr.innerHTML = row.map((cell, idx) => idx === 0 ? `<td style="font-family:var(--mono); font-weight:700; color:#93c5fd;">${cell}</td>` : `<td>${cell}</td>`).join("");
+        tbody.appendChild(tr);
+      });
+    }
+
+    function filterMatrix(filter, btn) {
+      document.querySelectorAll(".filter-chip").forEach(c => c.classList.remove("active"));
+      btn.classList.add("active");
+      renderMatrix(filter);
+    }
+
+    function switchTab(tabId, btn) {
+      document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+      document.querySelectorAll(".tab-pane").forEach(p => p.classList.remove("active"));
+      btn.classList.add("active");
+      document.getElementById(tabId).classList.add("active");
+    }
+
+    function downloadAuditDossier() {
+      const sys = SYSTEMS[selectedSystemIdx];
+      const fault = FAULTS[selectedFaultIdx];
+      const isClean = fault.id === "CLEAN";
+      const ts = new Date().toISOString();
+
+      const lines = [
+        `# ComplyBridge Enterprise AI Governance Control Plane — Audit & Blast-Radius Report`,
+        ``,
+        `- **Generated Timestamp (UTC):** \`${ts}\``,
+        `- **Target System:** \`${sys.id} (${sys.code})\` — ${sys.name}`,
+        `- **Sector & Supervision:** ${sys.sector}`,
+        `- **Simulated Scenario:** \`${fault.label}\``,
+        `- **CI/CD Policy Gate Verdict:** **\`${isClean ? "APPROVED (EXIT 0)" : "BLOCKED — GOVERNANCE VIOLATION (EXIT 1)"}\`**`,
+        `- **Max Statutory Fine Exposure:** \`${fault.fine}\``,
+        ``,
+        `---`,
+        ``,
+        `## System Architecture & Regulatory Scope`,
+        `- **EU AI Act Role & Tier:** ${sys.role} | ${sys.tier}`,
+        `- **Upstream Model:** ${sys.model}`,
+        `- **Residency & ZDR:** ${fault.residencyOverride || sys.regions + " | " + sys.zdr}`,
+        `- **Human Oversight:** ${sys.oversight}`,
+        `- **Applicable Regimes:** ${sys.regimes}`,
+        ``,
+        `---`,
+        ``,
+        `## Gate Findings & Required Remediation`,
+        ...(isClean
+          ? [`- **0 Violations Detected:** All 14 cross-framework controls verified.`]
+          : fault.violations.map(v => `- **[VIOLATION] ${v.title}:** ${v.detail}`)),
+        ``,
+        `### Engineering & Governance Action Items`,
+        ...fault.remediation.map(r => `- ${r}`),
+        ``,
+        `---`,
+        `*Generated live from Sashidhar Sripadanna's ComplyBridge AI Governance Control Plane (https://sashidhar2508.github.io/website/control-plane.html).*`
+      ];
+
+      const blob = new Blob([lines.join("\n")], { type: "text/markdown;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `ComplyBridge_Audit_Dossier_${sys.id}_${fault.id}.md`;
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    function renderAll() {
+      renderLeftSidebar();
+      renderWorkspace();
+    }
+
+    renderAll();
+    renderMatrix("ALL");
+  </script>
+</body>
+</html>
