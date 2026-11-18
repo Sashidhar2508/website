@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AI Governance Control Plane &amp; Blast-Radius Simulator | Sashidhar Sripadanna</title>
-  <meta name="description" content="Interactive regulatory blast-radius and configuration-drift simulator modeling OPA/Rego release gates across EU AI Act (Omnibus 2026/1744), DORA, GDPR, ISO/IEC 42001, and India DPDP / IT Rules 2026." />
+  <title>AI Governance Control Plane &amp; Drift Simulator | Sashidhar Sripadanna</title>
+  <meta name="description" content="Interactive reference simulator demonstrating how OPA/Rego CI/CD release gates evaluate fictionalized enterprise AI deployment manifests against EU AI Act, DORA, and GDPR/DPDP rules." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
@@ -20,12 +20,9 @@
       --text-secondary: #cbd5e1;
       --muted: #94a3b8;
       --accent: #3b82f6;
-      --accent-hover: #2563eb;
       --accent-soft: rgba(59, 130, 246, 0.14);
       --emerald: #10b981;
       --emerald-soft: rgba(16, 185, 129, 0.14);
-      --amber: #f59e0b;
-      --amber-soft: rgba(245, 158, 11, 0.14);
       --red: #ef4444;
       --red-soft: rgba(239, 68, 68, 0.14);
       --linkedin: #0a66c2;
@@ -44,7 +41,15 @@
     }
 
     a { color: inherit; text-decoration: none; }
-    code { font-family: var(--mono); font-size: 0.84em; background: rgba(15, 23, 42, 0.85); padding: 0.12rem 0.38rem; border-radius: 4px; border: 1px solid var(--border); color: #93c5fd; }
+    code {
+      font-family: var(--mono);
+      font-size: 0.84em;
+      background: rgba(15, 23, 42, 0.85);
+      padding: 0.12rem 0.38rem;
+      border-radius: 4px;
+      border: 1px solid var(--border);
+      color: #93c5fd;
+    }
 
     /* Navigation */
     nav {
@@ -57,7 +62,7 @@
     }
 
     .nav-inner {
-      max-width: 1260px;
+      max-width: 1200px;
       margin: 0 auto;
       padding: 0.8rem 1.5rem;
       display: flex;
@@ -84,7 +89,6 @@
       font-size: 0.88rem;
       color: #fff;
       flex-shrink: 0;
-      box-shadow: 0 4px 14px rgba(59, 130, 246, 0.35);
     }
 
     .brand-text strong { display: block; font-size: 0.98rem; font-weight: 700; }
@@ -126,27 +130,19 @@
     .icon-btn-li:hover { background: #004182; border-color: #004182; }
 
     .container {
-      max-width: 1260px;
+      max-width: 1200px;
       margin: 0 auto;
       padding: 0 1.5rem;
     }
 
     /* Header */
     .cp-hero {
-      padding: 2.4rem 0 2rem;
+      padding: 2.3rem 0 1.9rem;
       background:
-        radial-gradient(circle at 15% 20%, rgba(16, 185, 129, 0.12), transparent 42%),
-        radial-gradient(circle at 85% 15%, rgba(59, 130, 246, 0.14), transparent 42%),
+        radial-gradient(circle at 15% 20%, rgba(16, 185, 129, 0.10), transparent 42%),
+        radial-gradient(circle at 85% 15%, rgba(59, 130, 246, 0.12), transparent 42%),
         var(--bg);
       border-bottom: 1px solid var(--border);
-    }
-
-    .cp-top-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 1.5rem;
-      flex-wrap: wrap;
     }
 
     .cp-badge {
@@ -165,16 +161,16 @@
     }
 
     .cp-hero h1 {
-      font-size: clamp(1.65rem, 3.2vw, 2.3rem);
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
       font-weight: 800;
       letter-spacing: -0.02em;
-      margin-bottom: 0.55rem;
+      margin-bottom: 0.5rem;
     }
 
     .cp-hero p {
-      max-width: 820px;
+      max-width: 800px;
       color: var(--text-secondary);
-      font-size: 0.94rem;
+      font-size: 0.93rem;
     }
 
     .transparency-note {
@@ -186,10 +182,10 @@
       padding: 0.65rem 0.95rem;
       font-size: 0.81rem;
       color: var(--text-secondary);
-      max-width: 920px;
+      max-width: 900px;
     }
 
-    /* Main Cockpit Grid */
+    /* Cockpit */
     .cockpit {
       padding: 2rem 0 3.5rem;
     }
@@ -204,12 +200,11 @@
       margin-bottom: 0.65rem;
     }
 
-    /* System Selector Cards */
     .sys-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 0.85rem;
-      margin-bottom: 1.75rem;
+      margin-bottom: 1.65rem;
     }
 
     .sys-card {
@@ -226,7 +221,7 @@
     .sys-card:hover { border-color: var(--border-hover); background: var(--surface-2); }
     .sys-card.active {
       border-color: var(--emerald);
-      background: linear-gradient(180deg, rgba(16, 185, 129, 0.12), var(--surface));
+      background: linear-gradient(180deg, rgba(16, 185, 129, 0.11), var(--surface));
       box-shadow: 0 0 0 1px rgba(16, 185, 129, 0.35);
     }
 
@@ -252,7 +247,7 @@
 
     .sys-card strong {
       display: block;
-      font-size: 0.92rem;
+      font-size: 0.91rem;
       margin-bottom: 0.25rem;
     }
 
@@ -263,13 +258,13 @@
       line-height: 1.35;
     }
 
-    /* Drift Injection Bar */
+    /* Drift Bar */
     .drift-bar {
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 13px;
       padding: 1.15rem 1.25rem;
-      margin-bottom: 1.75rem;
+      margin-bottom: 1.65rem;
     }
 
     .drift-buttons {
@@ -302,7 +297,7 @@
       color: #fca5a5;
     }
 
-    /* Evaluation Workspace */
+    /* Workspace */
     .eval-grid {
       display: grid;
       grid-template-columns: 1.05fr 1.25fr;
@@ -344,7 +339,7 @@
       color: #e2e8f0;
     }
 
-    /* Gate Verdict Banner */
+    /* Verdict */
     .verdict-banner {
       border-radius: 11px;
       padding: 1rem 1.15rem;
@@ -511,19 +506,19 @@
         <div class="brand-mark">SS</div>
         <div class="brand-text">
           <strong>Sashidhar Sripadanna</strong>
-          <span>AI Governance Control Plane · Project 06</span>
+          <span>ComplyBridge Project 06 · Reference Simulator</span>
         </div>
       </a>
 
       <div class="nav-links">
-        <a href="index.html">← Back to Main Portfolio</a>
+        <a href="index.html">← Back to Portfolio</a>
         <a href="https://github.com/Sashidhar2508/complybridge-ai-governance-kit/tree/main/Project-06-AI-Governance-Control-Plane-and-Policy-Engine" target="_blank" rel="noopener">Rego Policies &amp; Engine ↗</a>
-        <a href="https://github.com/Sashidhar2508/complybridge-ai-governance-kit/blob/main/Project-06-AI-Governance-Control-Plane-and-Policy-Engine/RELEASE_AUDIT_EVIDENCE.md" target="_blank" rel="noopener">Signed Audit Dossier ↗</a>
+        <a href="https://github.com/Sashidhar2508/complybridge-ai-governance-kit/blob/main/Project-06-AI-Governance-Control-Plane-and-Policy-Engine/RELEASE_AUDIT_EVIDENCE.md" target="_blank" rel="noopener">CI/CD Test Log ↗</a>
       </div>
 
       <div class="nav-actions">
         <a href="https://www.linkedin.com/in/sashidhar-s-6a6662186" target="_blank" rel="noopener" class="icon-btn icon-btn-li">in LinkedIn ↗</a>
-        <a href="https://github.com/Sashidhar2508/complybridge-ai-governance-kit" target="_blank" rel="noopener" class="icon-btn">GitHub Suite ↗</a>
+        <a href="https://github.com/Sashidhar2508/complybridge-ai-governance-kit" target="_blank" rel="noopener" class="icon-btn">GitHub Repo ↗</a>
       </div>
     </div>
   </nav>
@@ -531,17 +526,13 @@
   <!-- Hero -->
   <header class="cp-hero">
     <div class="container">
-      <div class="cp-top-row">
-        <div>
-          <div class="cp-badge">● PROJECT 06 · INTERACTIVE REGULATORY BLAST-RADIUS SIMULATOR</div>
-          <h1>AI Governance Control Plane &amp; OPA Release Gate</h1>
-          <p>
-            Select any of the four enterprise AI system manifests below and inject realistic DevOps configuration drift—such as cross-border region failover, ZDR removal, HITL bypass, or stripped C2PA / SGI metadata—to inspect statutory exposure and CI/CD release blocks.
-          </p>
-          <div class="transparency-note">
-            <strong>Architecture Note:</strong> This browser cockpit interactively simulates the exact control rules codified in <code>eu_ai_act.rego</code>, <code>dora_resilience.rego</code>, and <code>gdpr_dpdp_privacy.rego</code>, which execute automatically via <code>opa eval</code> and <code>validate_governance_gates.py</code> inside GitHub Actions CI/CD.
-          </div>
-        </div>
+      <div class="cp-badge">● PROJECT 06 · REFERENCE POLICY-AS-CODE SIMULATOR</div>
+      <h1>AI Governance Control Plane &amp; Drift Simulator</h1>
+      <p>
+        Select any of the four fictionalized enterprise AI deployment manifests below and inject simulated DevOps configuration drift—such as cross-border region failover, ZDR removal, human-oversight bypass, or stripped provenance tags—to see how CI/CD release gates evaluate compliance controls.
+      </p>
+      <div class="transparency-note">
+        <strong>Sandbox Transparency Note:</strong> All four system profiles below are fictionalized reference manifests built for portfolio demonstration. The underlying Rego rules (<code>eu_ai_act.rego</code>, <code>dora_resilience.rego</code>, <code>gdpr_dpdp_privacy.rego</code>) and Python test harness (<code>validate_governance_gates.py</code>) execute via Open Policy Agent (OPA) in GitHub Actions.
       </div>
     </div>
   </header>
@@ -550,52 +541,52 @@
   <main class="cockpit">
     <div class="container">
 
-      <!-- Step 1: Select System -->
-      <div class="step-label">Step 1 · Select Production AI System Manifest</div>
+      <!-- Step 1: Select Reference System -->
+      <div class="step-label">Step 1 · Select Reference AI System Manifest</div>
       <div class="sys-grid" id="sysGrid">
         <button class="sys-card active" onclick="selectSystem('SYS-01', this)">
           <div class="sys-id"><span>SYS-01 · FF-06</span><span class="sys-tier">ANNEX III 5(b)</span></div>
-          <strong>Dublin IFSC Credit &amp; Fraud Engine</strong>
-          <span>High-Risk Financial AI · DORA (CBI) · Irish DPC Art. 22/35</span>
+          <strong>Reference Credit &amp; Fraud Model</strong>
+          <span>Simulated Financial AI · EU AI Act · DORA &amp; GDPR</span>
         </button>
 
         <button class="sys-card" onclick="selectSystem('SYS-02', this)">
           <div class="sys-id"><span>SYS-02 · HR-04</span><span class="sys-tier">ANNEX III 4(a)</span></div>
-          <strong>Enterprise HR Talent Screener</strong>
-          <span>High-Risk Employment AI · Art. 27 FRIA · Proxy Bias Scrubbing</span>
+          <strong>Reference HR Talent Screener</strong>
+          <span>Simulated Employment AI · Human Oversight &amp; Bias Filters</span>
         </button>
 
         <button class="sys-card" onclick="selectSystem('SYS-03', this)">
           <div class="sys-id"><span>SYS-03 · VF-02</span><span class="sys-tier">ART. 50(1)</span></div>
-          <strong>Multi-Tenant B2B Support RAG</strong>
-          <span>Limited-Risk Interactive AI · Live Disclosure Banner · ZDR</span>
+          <strong>Reference B2B Support RAG</strong>
+          <span>Simulated SaaS Copilot · Art. 50 Notice &amp; ZDR Gate</span>
         </button>
 
         <button class="sys-card" onclick="selectSystem('SYS-04', this)">
           <div class="sys-id"><span>SYS-04 · LG-09</span><span class="sys-tier">ART. 50(2) + SGI</span></div>
-          <strong>Synthetic M&amp;A Briefing Generator</strong>
-          <span>Generative Output · 2 Dec 2026 C2PA Cliff · India IT Rules 2026</span>
+          <strong>Reference Synthetic Briefing Tool</strong>
+          <span>Simulated GenAI Output · Provenance &amp; Metadata Tagging</span>
         </button>
       </div>
 
-      <!-- Step 2: Inject Configuration Drift -->
+      <!-- Step 2: Inject Simulated Drift -->
       <div class="drift-bar">
-        <div class="step-label">Step 2 · Inject DevOps / Cloud Configuration Drift (Chaos Testing)</div>
+        <div class="step-label">Step 2 · Inject Simulated DevOps Configuration Drift</div>
         <div class="drift-buttons" id="driftButtons">
           <button class="drift-btn active-clean" onclick="selectDrift('CLEAN', this)">✓ Clean Baseline (CI/CD Green)</button>
           <button class="drift-btn" onclick="selectDrift('DRIFT_REGION_ZDR', this)">⚡ Drift 01: Failover to us-east-1 + ZDR Off</button>
           <button class="drift-btn" onclick="selectDrift('DRIFT_HITL', this)">⚡ Drift 02: Bypass Human-in-the-Loop (Auto-Reject)</button>
-          <button class="drift-btn" onclick="selectDrift('DRIFT_TRANSPARENCY', this)">⚡ Drift 03: Strip Art. 50 Banner &amp; C2PA / SGI Tag</button>
-          <button class="drift-btn" onclick="selectDrift('DRIFT_DORA_VENDOR', this)">⚡ Drift 04: Unregistered GPAI Model (No DORA RoI)</button>
+          <button class="drift-btn" onclick="selectDrift('DRIFT_TRANSPARENCY', this)">⚡ Drift 03: Strip Art. 50 Banner &amp; Provenance Tag</button>
+          <button class="drift-btn" onclick="selectDrift('DRIFT_DORA_VENDOR', this)">⚡ Drift 04: Unregistered GPAI Model (No Vendor RoI)</button>
         </div>
       </div>
 
-      <!-- Step 3: Live Manifest vs OPA Evaluation -->
+      <!-- Step 3: Manifest vs OPA Evaluation -->
       <div class="eval-grid">
         <div class="panel">
           <div class="panel-head">
-            <h2>Deployment Manifest (<code>manifest.json</code>)</h2>
-            <span style="font-family:var(--mono); font-size:0.72rem; color:var(--muted);" id="manifestFileLabel">ff06_dublin_credit.json</span>
+            <h2>Simulated Manifest (<code>manifest.json</code>)</h2>
+            <span style="font-family:var(--mono); font-size:0.72rem; color:var(--muted);" id="manifestFileLabel">ff06_reference_credit.json</span>
           </div>
           <pre class="manifest-box" id="manifestOutput"></pre>
         </div>
@@ -608,8 +599,8 @@
 
           <div id="verdictBanner" class="verdict-banner verdict-pass">
             <div class="verdict-top">
-              <span class="verdict-status" id="verdictTitle">PASS — RELEASE APPROVED</span>
-              <span class="verdict-exit" id="verdictExit">EXIT CODE 0</span>
+              <span class="verdict-status" id="verdictTitle">PASS — RELEASE GATE APPROVED</span>
+              <span class="verdict-exit" id="verdictExit">OPA EXIT 0</span>
             </div>
             <div class="verdict-desc" id="verdictDesc"></div>
           </div>
@@ -620,25 +611,25 @@
               <strong id="metaPolicy"></strong>
             </div>
             <div class="meta-box">
-              <span>Primary Statutory / Control Anchor</span>
+              <span>Mapped Control / Regulatory Anchor</span>
               <strong id="metaStatute"></strong>
             </div>
             <div class="meta-box">
-              <span>Blast Radius &amp; Supervisory Impact</span>
+              <span>Simulated Risk Impact</span>
               <strong id="metaBlast"></strong>
             </div>
             <div class="meta-box">
-              <span>Control Owner &amp; Evidence Artefact</span>
+              <span>Reference Artefact &amp; Owner</span>
               <strong id="metaOwner"></strong>
             </div>
           </div>
 
           <div class="remediation-box">
-            <strong>Technical &amp; Governance Gate Action</strong>
+            <strong>CI/CD Gate Action &amp; Remediation</strong>
             <div id="remediationText"></div>
           </div>
 
-          <div class="step-label" style="margin-bottom:0.45rem;">Inspect Underlying Repo Artefacts (GitHub)</div>
+          <div class="step-label" style="margin-bottom:0.45rem;">Inspect Actual Repo Code (GitHub)</div>
           <div class="policy-links">
             <a href="https://github.com/Sashidhar2508/complybridge-ai-governance-kit/blob/main/Project-06-AI-Governance-Control-Plane-and-Policy-Engine/policies/eu_ai_act.rego" target="_blank" rel="noopener" class="policy-pill">eu_ai_act.rego ↗</a>
             <a href="https://github.com/Sashidhar2508/complybridge-ai-governance-kit/blob/main/Project-06-AI-Governance-Control-Plane-and-Policy-Engine/policies/dora_resilience.rego" target="_blank" rel="noopener" class="policy-pill">dora_resilience.rego ↗</a>
@@ -654,7 +645,7 @@
   <footer>
     <div class="container">
       <div class="footer-inner">
-        <div>© 2025–2026 Sashidhar Sripadanna · ComplyBridge Project 06 Control Plane</div>
+        <div>© 2025–2026 Sashidhar Sripadanna · ComplyBridge Project 06 Reference Simulator</div>
         <div class="footer-links">
           <a href="index.html">Portfolio Home</a>
           <a href="https://www.linkedin.com/in/sashidhar-s-6a6662186" target="_blank" rel="noopener">LinkedIn</a>
@@ -667,12 +658,13 @@
   <script>
     const SYSTEMS = {
       'SYS-01': {
-        file: 'ff06_dublin_credit.json',
+        file: 'ff06_reference_credit.json',
         base: {
           system_id: 'SYS-01 (FF-06)',
-          name: 'Dublin IFSC Credit & Fraud Triage Engine',
+          scenario_type: 'FICTIONALIZED_REFERENCE_MODEL',
+          name: 'Reference Credit & Fraud Triage Engine',
           risk_tier: 'HIGH_RISK_ANNEX_III_5B',
-          jurisdiction: ['EU', 'IRELAND_CBI'],
+          jurisdiction: ['EU', 'IRELAND'],
           deployment_region: 'eu-west-1',
           zero_data_retention: true,
           human_in_the_loop_hard_stop: true,
@@ -684,15 +676,16 @@
         },
         policy: 'complybridge.eu_ai_act + complybridge.dora + complybridge.privacy',
         statute: 'EU AI Act Annex III 5(b) · DORA Art. 28/30 · GDPR Art. 22/35',
-        owner: 'AI Risk Lead & IFSC DPO (Decision Log DEC-016)',
-        cleanDesc: 'All 14 controls verified: EEA region locked (eu-west-1), ZDR enforced, GDPR Art. 22 / EU AI Act Art. 14 human review hard-stop active, and DORA xBRL-CSV register current.',
-        cleanAction: 'CI/CD pipeline issues signed release attestation and updates Project 07 AI System Passport status to VERIFIED.'
+        owner: 'Case Study 03 Walkthrough (Decision Log DEC-016)',
+        cleanDesc: 'All reference controls pass: EEA region locked (eu-west-1), ZDR enabled, GDPR Art. 22 / EU AI Act Art. 14 human review hard-stop active, and vendor register entry present.',
+        cleanAction: 'CI/CD pipeline passes and logs verification evidence for the Project 07 AI System Passport template.'
       },
       'SYS-02': {
-        file: 'hr04_talent_screener.json',
+        file: 'hr04_reference_screener.json',
         base: {
           system_id: 'SYS-02 (HR-04)',
-          name: 'Enterprise HR Talent & Interview Screener',
+          scenario_type: 'FICTIONALIZED_REFERENCE_MODEL',
+          name: 'Reference HR Talent & Interview Screener',
           risk_tier: 'HIGH_RISK_ANNEX_III_4A',
           jurisdiction: ['EU', 'US', 'INDIA'],
           deployment_region: 'eu-central-1',
@@ -701,19 +694,20 @@
           proxy_attribute_scrubbing: true,
           art50_disclosure_banner: true,
           dora_roi_registered: 'N/A_NON_FINANCIAL',
-          dpia_fria_status: 'APPROVED_FRIA_2026'
+          dpia_fria_status: 'APPROVED_FRIA_TEMPLATE'
         },
         policy: 'complybridge.eu_ai_act + complybridge.privacy',
         statute: 'EU AI Act Annex III 4(a) & Art. 27 FRIA · GDPR Art. 22',
-        owner: 'People Risk & AI Governance Lead (Kit 02)',
-        cleanDesc: 'Candidate screening operates strictly in advisory scoring mode with Art. 14 human recruiter sign-off, Art. 27 FRIA completed, and proxy bias scrubbing enabled.',
-        cleanAction: 'CI/CD gate passes. Quarterly bias/drift telemetry logged under ISO/IEC 42001 Clause 9.'
+        owner: 'Kit 02 Due-Diligence & Risk Pack Template',
+        cleanDesc: 'Candidate screening operates in advisory scoring mode with human recruiter sign-off, completed FRIA checklist, and proxy attribute scrubbing enabled.',
+        cleanAction: 'CI/CD gate passes. Periodic bias/drift telemetry recorded under ISO/IEC 42001 monitoring templates.'
       },
       'SYS-03': {
-        file: 'vf02_b2b_support_rag.json',
+        file: 'vf02_reference_rag.json',
         base: {
           system_id: 'SYS-03 (VF-02)',
-          name: 'Multi-Tenant B2B Support RAG Copilot',
+          scenario_type: 'FICTIONALIZED_REFERENCE_MODEL',
+          name: 'Reference Multi-Tenant B2B Support RAG',
           risk_tier: 'LIMITED_RISK_ART_50_1',
           jurisdiction: ['EU', 'INDIA'],
           deployment_region: 'eu-west-1',
@@ -725,16 +719,17 @@
           dpia_fria_status: 'LIA_AND_ZDR_VERIFIED'
         },
         policy: 'complybridge.eu_ai_act + complybridge.privacy',
-        statute: 'EU AI Act Art. 50(1) (Enforced 2 Aug 2026) · GDPR Art. 28',
-        owner: 'Customer Trust & Platform Security Lead (Kit 03)',
-        cleanDesc: 'Upfront AI interaction notice active (Art. 50(1)), strict tenant vector isolation verified, and contractual Zero-Data-Retention confirmed with upstream GPAI provider.',
-        cleanAction: 'CI/CD gate passes. Ready for 48-hour enterprise buyer security pack export.'
+        statute: 'EU AI Act Art. 50(1) Interactive Disclosure · GDPR Art. 28',
+        owner: 'Kit 03 GPAI Vendor & ZDR Scorecard Template',
+        cleanDesc: 'Upfront AI interaction notice active, tenant vector namespace isolation enabled, and Zero-Data-Retention confirmed for upstream model API calls.',
+        cleanAction: 'CI/CD gate passes. Ready for customer InfoSec questionnaire review.'
       },
       'SYS-04': {
-        file: 'lg09_synthetic_briefing.json',
+        file: 'lg09_reference_synthetic.json',
         base: {
           system_id: 'SYS-04 (LG-09)',
-          name: 'Synthetic M&A Briefing & Document Generator',
+          scenario_type: 'FICTIONALIZED_REFERENCE_MODEL',
+          name: 'Reference Synthetic Briefing Generator',
           risk_tier: 'LIMITED_RISK_ART_50_2',
           jurisdiction: ['EU', 'INDIA'],
           deployment_region: 'eu-west-1',
@@ -743,13 +738,13 @@
           art50_disclosure_banner: true,
           c2pa_sgi_provenance_tag: true,
           dora_roi_registered: true,
-          dpia_fria_status: 'VERIFIED_CH_V_GPAI'
+          dpia_fria_status: 'VERIFIED_GPAI_CHECKLIST'
         },
         policy: 'complybridge.eu_ai_act + complybridge.privacy',
-        statute: 'EU AI Act Art. 50(2) (2 Dec 2026 Cliff) · India IT Rules 2026 SGI',
-        owner: 'AI GovOps & Legal Assurance Lead (Kit 04)',
-        cleanDesc: 'Machine-readable C2PA provenance watermark and India IT Amendment Rules 2026 SGI metadata tags are injected on every generated document and audio brief.',
-        cleanAction: 'CI/CD gate passes ahead of the 2 Dec 2026 EU AI Act Art. 50(2) enforcement deadline.'
+        statute: 'EU AI Act Art. 50(2) Provenance · India IT Rules 2026 SGI',
+        owner: 'Kit 04 Model Card & Provenance Template',
+        cleanDesc: 'Machine-readable C2PA provenance watermark and India SGI metadata tags are attached to generated text and audio outputs.',
+        cleanAction: 'CI/CD gate passes with provenance metadata middleware verified.'
       }
     };
 
@@ -798,7 +793,7 @@
         desc.textContent = sys.cleanDesc;
         metaPolicy.textContent = sys.policy;
         metaStatute.textContent = sys.statute;
-        metaBlast.textContent = 'Contained · Zero Unmitigated Statutory Exposure';
+        metaBlast.textContent = 'Contained · Reference Controls Satisfied';
         metaOwner.textContent = sys.owner;
         remediation.textContent = sys.cleanAction;
       } else if (currentDrift === 'DRIFT_REGION_ZDR') {
@@ -807,54 +802,28 @@
         banner.className = 'verdict-banner verdict-fail';
         title.textContent = 'BLOCKED — CROSS-BORDER RESIDENCY & ZDR VIOLATION';
         exit.textContent = 'OPA EXIT 1';
-        desc.textContent = 'Terraform drift routed inference traffic outside the EEA to us-east-1 with Zero-Data-Retention disabled, exposing regulated PII/financial prompts to third-party model logging.';
+        desc.textContent = 'Simulated Terraform drift routed inference traffic outside the EEA to us-east-1 with Zero-Data-Retention disabled, exposing regulated data to external retention.';
         metaPolicy.textContent = 'complybridge.privacy.deny_non_eea_or_no_zdr';
         metaStatute.textContent = 'GDPR Art. 44/28 · DORA Art. 28 ICT Location · India DPDP';
-        metaBlast.textContent = 'HIGH · Unlawful International Transfer & Training Leakage';
-        metaOwner.textContent = 'Cloud Platform Engineering + DPO Escalation';
-        remediation.textContent = 'CI/CD deployment halted. Revert region to eu-west-1 / eu-central-1, re-enable AWS SCP region deny, and restore ZDR header enforcement.';
+        metaBlast.textContent = 'HIGH · Unapproved Cross-Border Transfer & Data Retention';
+        metaOwner.textContent = 'Cloud Platform Engineering + DPO Review';
+        remediation.textContent = 'CI/CD deployment halted. Revert region to eu-west-1 / eu-central-1, enforce cloud region guardrails, and restore ZDR configuration.';
       } else if (currentDrift === 'DRIFT_HITL') {
         manifest.human_in_the_loop_hard_stop = false;
         banner.className = 'verdict-banner verdict-fail';
         title.textContent = 'BLOCKED — AUTONOMOUS DECISION WITHOUT HUMAN OVERSIGHT';
         exit.textContent = 'OPA EXIT 1';
-        desc.textContent = 'Configuration removed the mandatory human-in-the-loop review gate, allowing the model to issue automated adverse credit, employment, or account decisions.';
+        desc.textContent = 'Simulated config change removed the human-in-the-loop review gate, allowing automated adverse decisions without qualified human sign-off.';
         metaPolicy.textContent = 'complybridge.eu_ai_act.deny_missing_hitl_oversight';
         metaStatute.textContent = 'EU AI Act Art. 14 · GDPR Art. 22 Automated Profiling';
-        metaBlast.textContent = 'CRITICAL · Direct Fundamental Rights & Regulatory Enforcement';
-        metaOwner.textContent = 'Product Engineering + Operational Risk Sign-Off';
-        remediation.textContent = 'CI/CD deployment halted. Restore human_in_the_loop_hard_stop: true so adverse outputs route to a qualified human reviewer queue.';
+        metaBlast.textContent = 'CRITICAL · Unreviewed Automated Adverse Decisions';
+        metaOwner.textContent = 'Product Engineering + Risk Sign-Off';
+        remediation.textContent = 'CI/CD deployment halted. Restore human_in_the_loop_hard_stop: true so adverse outputs route to a human review queue.';
       } else if (currentDrift === 'DRIFT_TRANSPARENCY') {
         manifest.art50_disclosure_banner = false;
         manifest.c2pa_sgi_provenance_tag = false;
         banner.className = 'verdict-banner verdict-fail';
-        title.textContent = 'BLOCKED — ART. 50 DISCLOSURE & C2PA / SGI TAG STRIPPED';
+        title.textContent = 'BLOCKED — ART. 50 DISCLOSURE & PROVENANCE TAG STRIPPED';
         exit.textContent = 'OPA EXIT 1';
-        desc.textContent = 'UI/API release removed the upfront AI interaction disclosure banner and stripped machine-readable C2PA / India SGI provenance metadata from synthetic outputs.';
-        metaPolicy.textContent = 'complybridge.eu_ai_act.deny_missing_art50_or_sgi_label';
-        metaStatute.textContent = 'EU AI Act Art. 50(1)/(2) · India IT Amendment Rules 2026';
-        metaBlast.textContent = 'HIGH · Immediate Non-Compliance with Enforced Transparency Rules';
-        metaOwner.textContent = 'Frontend / API Gateway Team + AI GovOps';
-        remediation.textContent = 'CI/CD deployment halted. Re-enable Art. 50(1) disclosure banner and C2PA / SGI metadata signing middleware before merge.';
-      } else if (currentDrift === 'DRIFT_DORA_VENDOR') {
-        manifest.dora_roi_registered = false;
-        manifest.dora_exit_plan_tested = false;
-        manifest.unapproved_gpai_model = 'shadow-llm-endpoint-v2';
-        banner.className = 'verdict-banner verdict-fail';
-        title.textContent = 'BLOCKED — UNREGISTERED ICT / GPAI SUB-PROCESSOR';
-        exit.textContent = 'OPA EXIT 1';
-        desc.textContent = 'Manifest references an unvetted foundation model endpoint absent from the DORA Art. 28(3) Register of Information and lacking Art. 30 supervisory audit and exit clauses.';
-        metaPolicy.textContent = 'complybridge.dora.deny_unregistered_ict_provider';
-        metaStatute.textContent = 'DORA Reg. (EU) 2022/2554 Art. 28(3) & Art. 30(2)';
-        metaBlast.textContent = 'HIGH · Central Bank Supervisory Audit Deficiency';
-        metaOwner.textContent = 'Third-Party ICT Risk & Vendor Governance (Kit 03)';
-        remediation.textContent = 'CI/CD deployment halted. Complete Kit 03 GPAI Vendor Scorecard, execute DPA/ZDR addendum, and log provider in DORA xBRL-CSV Register.';
-      }
-
-      document.getElementById('manifestOutput').textContent = JSON.stringify(manifest, null, 2);
-    }
-
-    render();
-  </script>
-</body>
-</html>
+        desc.textContent = 'Simulated UI/API change removed the upfront AI interaction notice and stripped machine-readable provenance metadata from synthetic outputs.';
+        metaPolicy
