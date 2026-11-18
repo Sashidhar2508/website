@@ -783,6 +783,28 @@
       font-weight: 700;
     }
 
+    .vault-featured {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      background: linear-gradient(90deg, rgba(16, 185, 129, 0.12), rgba(59, 130, 246, 0.12));
+      border: 1px solid rgba(16, 185, 129, 0.38);
+      border-radius: 10px;
+      padding: 0.85rem 1rem;
+      margin-bottom: 0.85rem;
+      transition: all 0.15s;
+    }
+
+    .vault-featured:hover {
+      border-color: var(--emerald);
+      background: linear-gradient(90deg, rgba(16, 185, 129, 0.20), rgba(59, 130, 246, 0.18));
+    }
+
+    .vault-featured strong { display: block; font-size: 0.86rem; color: #fff; }
+    .vault-featured span { font-size: 0.75rem; color: var(--text-secondary); }
+
     .vault-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -1204,7 +1226,7 @@
 
     <div id="mobileDrawer" class="mobile-drawer">
       <a href="control-plane.html" style="color:#6ee7b7; font-weight:700;">● Live AI Governance Control Plane</a>
-      <a href="#suite" onclick="this.parentElement.classList.remove('open')">ComplyBridge Suite (Kits 01–06 + Case Study 03)</a>
+      <a href="#suite" onclick="this.parentElement.classList.remove('open')">ComplyBridge Suite (Modules 01–07 + Case Study 03)</a>
       <a href="#radar" onclick="this.parentElement.classList.remove('open')">2026 Regulatory Enforcement Radar</a>
       <a href="#role-fit" onclick="this.parentElement.classList.remove('open')">Target Role Fit Explorer</a>
       <a href="#experience" onclick="this.parentElement.classList.remove('open')">13+ Yrs Experience &amp; Credentials</a>
@@ -1332,12 +1354,12 @@
           <span>Technical-to-Executive Bridge Across 35+ US &amp; Global Accounts</span>
         </div>
         <div class="proof-item">
-          <strong>48-Hour SLA</strong>
-          <span>Enterprise Buyer InfoSec &amp; AI Due-Diligence Turnaround</span>
+          <strong>48-Hr Buyer Kit</strong>
+          <span>Pre-Mapped Enterprise AI InfoSec &amp; Governance Pack</span>
         </div>
         <div class="proof-item">
-          <strong>6 Kits + 16 Logs</strong>
-          <span>Dublin IFSC Audit, 14 OPA Controls &amp; Live Control Plane</span>
+          <strong>7 Modules + 16 Logs</strong>
+          <span>AI Passports, IFSC Reference Audit &amp; 14 OPA Gates</span>
         </div>
       </div>
     </div>
@@ -1352,17 +1374,17 @@
           <h2>ComplyBridge AI Governance Suite</h2>
         </div>
         <p>
-          Complete lifecycle from AI system discovery and 48-hour buyer packs to Dublin IFSC financial audits and automated OPA/Rego CI/CD release gates.
+          End-to-end reference lifecycle from AI system discovery and 48-hour buyer packs to Dublin IFSC financial audit models and automated OPA/Rego CI/CD release gates.
         </p>
       </div>
 
       <!-- Featured Interactive Control Plane Spotlight -->
       <div class="spotlight">
         <div>
-          <div class="spotlight-badge">● PROJECT 06 · LIVE ZERO-LOCALHOST POLICY ENGINE &amp; CI/CD GATE</div>
+          <div class="spotlight-badge">● PROJECT 06 · BROWSER SIMULATOR + GITHUB ACTIONS OPA GATE</div>
           <h3>AI Governance Control Plane &amp; Regulatory Blast-Radius Simulator</h3>
           <p>
-            Interactive governance cockpit backed by real <strong>Open Policy Agent (OPA / Rego)</strong> policies and Python gate verification running in GitHub Actions. Inject realistic DevOps drift—such as Terraform failover to <code>us-east-1</code> without ZDR, autonomous credit rejection, or missing C2PA marking—to inspect statutory exposure and automated release blocks.
+            Browser-based regulatory blast-radius simulator paired with executable <strong>Open Policy Agent (OPA / Rego)</strong> policies and Python gate verification running in GitHub Actions. Inject realistic DevOps drift—such as Terraform failover to <code>us-east-1</code> without ZDR, autonomous credit rejection, or missing C2PA marking—to inspect statutory exposure and automated release blocks.
           </p>
           <div class="chaos-summary">
             <span class="chaos-pill">✓ 4 Production Manifests Verified</span>
@@ -1409,10 +1431,10 @@
 
       <!-- Filter Tabs -->
       <div class="filter-bar" role="tablist" aria-label="Filter ComplyBridge Modules">
-        <button class="filter-btn active" onclick="filterSuite('all', this)">All Modules &amp; Case Studies (7)</button>
-        <button class="filter-btn" onclick="filterSuite('case', this)">Regulated Audits &amp; Policy-as-Code (2)</button>
-        <button class="filter-btn" onclick="filterSuite('risk', this)">Inventory, Buyer Packs &amp; GPAI Vendor Risk (3)</button>
-        <button class="filter-btn" onclick="filterSuite('ops', this)">Transparency &amp; AI GovOps (2)</button>
+        <button class="filter-btn active" onclick="filterSuite('all', this)">All Core Modules &amp; Audits (6)</button>
+        <button class="filter-btn" onclick="filterSuite('case', this)">Reference Audits &amp; Policy-as-Code (2)</button>
+        <button class="filter-btn" onclick="filterSuite('risk', this)">Inventory, Buyer Packs &amp; GPAI Risk (3)</button>
+        <button class="filter-btn" onclick="filterSuite('ops', this)">Transparency &amp; AI GovOps (1)</button>
       </div>
 
       <!-- Rich 2-Column Module Cards -->
@@ -1444,11 +1466,11 @@
         <article class="suite-card" data-cat="case">
           <div>
             <div class="suite-top">
-              <span class="suite-code">CASE STUDY 03 · DUBLIN IFSC FINTECH AUDIT</span>
+              <span class="suite-code">CASE STUDY 03 · WORKED REFERENCE AUDIT</span>
               <span class="suite-date">Oct – Nov 2026</span>
             </div>
-            <h3>EmeraldPay Dublin IFSC Credit &amp; Fraud Triage Remediation</h3>
-            <p>End-to-end Irish financial services regulatory audit covering Central Bank of Ireland DORA supervision, Irish DPC GDPR Art. 22/35 DPIA, and EU AI Act Annex III 5(b).</p>
+            <h3>Dublin IFSC FinTech Credit &amp; Fraud Triage Reference Audit</h3>
+            <p>End-to-end Irish financial services regulatory reference scenario modeling Central Bank of Ireland DORA supervision, Irish DPC GDPR Art. 22/35 DPIA, and EU AI Act Annex III 5(b).</p>
             <ul class="deliverable-list">
               <li>Worked Dublin IFSC FinTech audit report &amp; AWS Bedrock EEA architecture</li>
               <li><code>DEC-016</code> Regulatory Decision Log (Art. 22 no-auto-decline hard stop)</li>
@@ -1475,7 +1497,7 @@
             <p>Establishes the foundational system-of-record separating Provider vs. Deployer duties, Article 5 prohibited practices, and Annex III High-Risk triggers.</p>
             <ul class="deliverable-list">
               <li>10-column AI System Inventory Register &amp; classification decision matrix</li>
-              <li>Worked Hyderabad B2B SaaS classification audit &amp; boundary analysis</li>
+              <li>Worked Hyderabad B2B SaaS classification reference audit &amp; boundary analysis</li>
               <li>Advisory decision logs resolving high-risk vs. narrow procedural exemptions</li>
             </ul>
           </div>
@@ -1496,10 +1518,10 @@
               <span class="suite-date">Jul – Oct 2025</span>
             </div>
             <h3>Enterprise Customer Trust &amp; InfoSec Due-Diligence Kit</h3>
-            <p>Compresses multi-week enterprise procurement and bank security reviews into a 48-hour response workflow with pre-mapped legal and technical artefacts.</p>
+            <p>Standardizes multi-week enterprise procurement and bank security reviews into a repeatable 48-hour response workflow with pre-mapped legal and technical artefacts.</p>
             <ul class="deliverable-list">
               <li>Standardized 48-hour enterprise buyer AI security &amp; governance pack</li>
-              <li>Worked Frankfurt bank procurement review &amp; HR screener risk pack</li>
+              <li>Worked Frankfurt bank procurement scenario &amp; HR screener risk pack</li>
               <li>Human-in-the-loop (HITL) escalation &amp; pre-submission legal checklist</li>
             </ul>
           </div>
@@ -1524,7 +1546,7 @@
             <ul class="deliverable-list">
               <li>GPAI vendor risk scorecard evaluating ZDR, retention, and EU Ch. V compliance</li>
               <li>Contractual Zero-Data-Retention (ZDR) &amp; enterprise IP indemnity clauses</li>
-              <li>Worked VeloceFlow ZDR &amp; IP audit case study + advisory decision logs</li>
+              <li>Worked VeloceFlow ZDR &amp; IP reference audit + advisory decision logs</li>
             </ul>
           </div>
           <div class="suite-footer">
@@ -1568,18 +1590,27 @@
           <h3>Direct Executive Artefacts &amp; Audit Evidence Vault (1-Click GitHub Access)</h3>
           <span style="font-size:0.78rem; color:var(--muted);">Apache 2.0 Licensed · Ready for CISO, Legal &amp; Recruiter Inspection</span>
         </div>
+
+        <a href="https://github.com/Sashidhar2508/complybridge-ai-governance-kit/tree/main/Project-07-AI-System-Passport-and-Executive-Assurance-Pack" target="_blank" rel="noopener" class="vault-featured">
+          <div>
+            <strong>Project 07 · AI System Passport &amp; Cross-Border Jurisdiction Delta Matrix (EU · US · India)</strong>
+            <span>1-page buyer &amp; board assurance passports linking OPA release gates, ZDR posture, and statutory deltas</span>
+          </div>
+          <span class="vault-ext" style="background:var(--emerald-soft); color:#6ee7b7; border:1px solid rgba(16,185,129,0.35);">CAPSTONE FOLDER ↗</span>
+        </a>
+
         <div class="vault-grid">
           <a href="https://github.com/Sashidhar2508/complybridge-ai-governance-kit/blob/main/00_Executive_One_Pager_90_Second_Brief.pdf" target="_blank" rel="noopener" class="vault-item">
             <div>
               <strong>90-Second Executive Brief</strong>
-              <span>1-page commercial &amp; governance summary</span>
+              <span>1-page governance &amp; portfolio summary</span>
             </div>
             <span class="vault-ext">PDF ↗</span>
           </a>
           <a href="https://github.com/Sashidhar2508/complybridge-ai-governance-kit/blob/main/00_ComplyBridge_Executive_Overview.docx" target="_blank" rel="noopener" class="vault-item">
             <div>
               <strong>ComplyBridge Executive Overview</strong>
-              <span>Full suite architecture &amp; engagement model</span>
+              <span>Full suite architecture &amp; control model</span>
             </div>
             <span class="vault-ext">DOCX ↗</span>
           </a>
@@ -1726,7 +1757,7 @@
           <h4>Verified Proof Points</h4>
           <ul>
             <li><strong>IAPP AIGP Candidate</strong> + Oracle Cloud Infrastructure 2025 AI Associate.</li>
-            <li>Authored <strong>ComplyBridge Kits 01–06</strong> + <strong>16 Regulatory Decision Logs</strong>.</li>
+            <li>Authored <strong>ComplyBridge Modules 01–07</strong> + <strong>16 Regulatory Decision Logs</strong>.</li>
             <li>Translated legal text into executable <strong>OPA / Rego</strong> policies verified in GitHub Actions.</li>
           </ul>
         </div>
@@ -1748,7 +1779,7 @@
           <ul>
             <li>Cut recurring production incidents by <strong>~35%</strong> across <strong>20+ global accounts</strong> at CBTS (99.9% SLA).</li>
             <li>Executed <strong>50+ formal post-incident RCAs</strong> and DR readiness audits across US &amp; global workloads.</li>
-            <li>Authored <strong>Dublin IFSC FinTech Audit (Case Study 03)</strong> &amp; DORA vendor register.</li>
+            <li>Authored <strong>Dublin IFSC FinTech Reference Audit (Case Study 03)</strong> &amp; DORA vendor register.</li>
           </ul>
         </div>
       </div>
@@ -1779,8 +1810,8 @@
           <h3>Customer Trust, InfoSec Assurance &amp; AI Sales Enablement</h3>
           <p>Designed for B2B AI and SaaS companies losing enterprise deals in 6-week legal, privacy, and security procurement queues.</p>
           <ul class="role-checklist">
-            <li>Compress enterprise buyer security and AI due-diligence turnaround from multi-week delays to <strong>48 hours</strong>.</li>
-            <li>Deliver pre-built Buyer Evidence Packs, signed OPA CI/CD audit dossiers, and clear Human-in-the-Loop guarantees.</li>
+            <li>Build repeatable <strong>48-hour</strong> enterprise buyer security and AI due-diligence workflows using pre-mapped evidence packs.</li>
+            <li>Deliver AI System Passports, signed OPA CI/CD audit dossiers, and clear Human-in-the-Loop guarantees.</li>
             <li>Partner with Account Executives and Solutions Architects on live CISO / DPO / Legal security calls.</li>
             <li>Standardize DPA, ZDR, EEA data-residency, and IP indemnification responses across US, EU, and Indian enterprise buyers.</li>
           </ul>
@@ -1788,8 +1819,8 @@
         <div class="role-proof-box">
           <h4>Verified Proof Points</h4>
           <ul>
-            <li>Built <strong>ComplyBridge Kit 02 (48-Hour Buyer Pack)</strong> &amp; <strong>90-Second Executive Brief</strong>.</li>
-            <li>Published live browser-based <strong>Control Plane Simulator</strong> for instant CISO demonstrations.</li>
+            <li>Built <strong>ComplyBridge Kit 02 (48-Hour Buyer Pack)</strong> &amp; <strong>Project 07 AI System Passports</strong>.</li>
+            <li>Published browser-based <strong>Control Plane Simulator</strong> for instant CISO demonstrations.</li>
             <li>Hands-on mastery of OCI, AWS, Azure, GCP, Kubernetes, Terraform, and enterprise IAM.</li>
           </ul>
         </div>
@@ -1813,11 +1844,11 @@
           <div class="tl-item active">
             <div class="tl-period">03/2025 – PRESENT</div>
             <h3>Independent AI Governance &amp; Risk Advisor</h3>
-            <div class="tl-org">ComplyBridge AI Governance Kit (Independent Advisory Practice) · Remote</div>
+            <div class="tl-org">ComplyBridge AI Governance Suite (Open-Source Governance-Engineering Portfolio) · Remote</div>
             <ul class="tl-bullets">
-              <li>Authored the open-source <strong>ComplyBridge suite</strong>—6 modular governance toolkits, 16 advisory decision logs, worked B2B SaaS &amp; Dublin IFSC FinTech audits, and an interactive Control Plane.</li>
+              <li>Authored the open-source <strong>ComplyBridge suite</strong>—7 modular governance toolkits &amp; AI System Passports, 16 regulatory decision logs, worked B2B SaaS &amp; Dublin IFSC FinTech reference audits, and an interactive Control Plane.</li>
               <li>Built executable <strong>OPA / Rego Policy-as-Code</strong> gates and GitHub Actions CI/CD verification mapping EU AI Act (Omnibus 2026/1744), DORA, GDPR, ISO/IEC 42001, NIST AI RMF, and India DPDP.</li>
-              <li>Compressed enterprise buyer AI security review turnaround from multi-week delays to <strong>48 hours</strong> via standardized evidence packs, ZDR/IP scorecards, and Art. 50 Model Cards.</li>
+              <li>Designed a repeatable <strong>48-hour enterprise buyer due-diligence workflow</strong> featuring pre-mapped evidence packs, ZDR/IP scorecards, and Art. 50 Model Cards.</li>
             </ul>
           </div>
 
@@ -2040,7 +2071,7 @@
     }
 
     function copyRecruiterPitch(btn) {
-      const pitch = "Sashidhar Sripadanna — AI Governance & Risk Advisor | Technical Account Manager (TAM) | 13+ Yrs US & India Cloud, DevOps & Enterprise Infrastructure Engineer (IAPP AIGP Candidate, OCI 2025 AI & Foundations Associate, M.S. Computer Engineering UHCL). Author of ComplyBridge AI Governance Suite & Live OPA/Rego Policy-as-Code Control Plane (https://sashidhar2508.github.io/website/ | https://www.linkedin.com/in/sashidhar-s-6a6662186). Open to Ireland/EU (CSEP eligible), Global Remote & India GCC leadership roles.";
+      const pitch = "Sashidhar Sripadanna — AI Governance & Risk Advisor | Technical Account Manager (TAM) | 13+ Yrs US & India Cloud, DevOps & Enterprise Infrastructure Engineer (IAPP AIGP Candidate, OCI 2025 AI & Foundations Associate, M.S. Computer Engineering UHCL). Creator of ComplyBridge AI Governance Suite & OPA/Rego Policy-as-Code Control Plane (https://sashidhar2508.github.io/website/ | https://www.linkedin.com/in/sashidhar-s-6a6662186). Open to Ireland/EU (CSEP eligible), Global Remote & India GCC leadership roles.";
       copyText(pitch, btn);
     }
   </script>
