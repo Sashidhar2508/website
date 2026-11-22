@@ -1,0 +1,1291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sashidhar Sripadanna | IT Business Analyst · AI Product &amp; Service Operations Bridge</title>
+  <meta name="description" content="IT Business Analyst and AI Product Bridge with 13+ years of US & India enterprise systems, cloud, and 24/7 support operations delivery (OCI 2025 AI Associate, IAPP AIGP Candidate). Translates stakeholder needs into prioritized user stories, analyzes operational data, and builds practical AI PoCs." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #060a12;
+      --bg-elevated: #0b1120;
+      --surface: #10192c;
+      --surface-2: #16223b;
+      --border: #22314e;
+      --border-hover: #3b588c;
+      --text: #f8fafc;
+      --text-secondary: #cbd5e1;
+      --muted: #94a3b8;
+      --accent: #3b82f6;
+      --accent-hover: #2563eb;
+      --accent-soft: rgba(59, 130, 246, 0.14);
+      --emerald: #10b981;
+      --emerald-soft: rgba(16, 185, 129, 0.14);
+      --linkedin: #0a66c2;
+      --mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    code {
+      font-family: var(--mono);
+      font-size: 0.84em;
+      background: rgba(15, 23, 42, 0.85);
+      padding: 0.12rem 0.38rem;
+      border-radius: 4px;
+      border: 1px solid var(--border);
+      color: #93c5fd;
+    }
+
+    /* Sticky Navigation */
+    nav {
+      background: rgba(6, 10, 18, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0.8rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .brand-mark {
+      width: 36px;
+      height: 36px;
+      border-radius: 9px;
+      background: linear-gradient(135deg, var(--accent), var(--emerald));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 0.88rem;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .brand-text strong {
+      display: block;
+      font-size: 0.98rem;
+      font-weight: 700;
+    }
+
+    .brand-text span {
+      display: block;
+      font-size: 0.72rem;
+      color: var(--muted);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.35rem;
+      font-size: 0.84rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+    }
+
+    .nav-links a:hover { color: #fff; }
+
+    .nav-live {
+      color: #6ee7b7 !important;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .pulse-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--emerald);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+    }
+
+    .icon-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.46rem 0.85rem;
+      border-radius: 7px;
+      font-size: 0.79rem;
+      font-weight: 600;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text);
+      transition: all 0.15s ease;
+    }
+
+    .icon-btn:hover { border-color: var(--border-hover); background: var(--surface-2); }
+    .icon-btn-li { background: var(--linkedin); border-color: var(--linkedin); color: #fff; }
+    .icon-btn-li:hover { background: #004182; border-color: #004182; }
+
+    .mobile-menu-btn {
+      display: none;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 0.45rem 0.75rem;
+      border-radius: 7px;
+      font-size: 0.84rem;
+      cursor: pointer;
+    }
+
+    .mobile-drawer {
+      display: none;
+      background: var(--bg-elevated);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 1.5rem 1.25rem;
+      flex-direction: column;
+      gap: 0.75rem;
+      font-size: 0.9rem;
+    }
+
+    .mobile-drawer.open { display: flex; }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* Hero */
+    .hero {
+      padding: 3.5rem 0 3rem;
+      background:
+        radial-gradient(circle at 12% 18%, rgba(59, 130, 246, 0.13), transparent 42%),
+        radial-gradient(circle at 88% 15%, rgba(16, 185, 129, 0.10), transparent 40%),
+        var(--bg);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.28fr 0.98fr;
+      gap: 2.25rem;
+      align-items: start;
+    }
+
+    .availability-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--emerald-soft);
+      border: 1px solid rgba(16, 185, 129, 0.35);
+      color: #6ee7b7;
+      font-size: 0.73rem;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      padding: 0.34rem 0.85rem;
+      border-radius: 999px;
+      margin-bottom: 1.1rem;
+    }
+
+    .hero h1 {
+      font-size: clamp(1.95rem, 3.8vw, 2.75rem);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.025em;
+      margin-bottom: 1rem;
+    }
+
+    .hero h1 span {
+      background: linear-gradient(90deg, #60a5fa, #34d399);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-lead {
+      font-size: 1.04rem;
+      color: var(--text-secondary);
+      margin-bottom: 0.85rem;
+    }
+
+    .hero-sub {
+      font-size: 0.92rem;
+      color: var(--muted);
+      margin-bottom: 1.65rem;
+    }
+
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.7rem;
+      margin-bottom: 1.45rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.72rem 1.2rem;
+      border-radius: 9px;
+      font-size: 0.87rem;
+      font-weight: 600;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: all 0.16s ease;
+    }
+
+    .btn-emerald {
+      background: var(--emerald);
+      color: #042f2e;
+      font-weight: 700;
+    }
+    .btn-emerald:hover { background: #34d399; transform: translateY(-1px); }
+
+    .btn-linkedin {
+      background: var(--linkedin);
+      color: #fff;
+    }
+    .btn-linkedin:hover { background: #004182; transform: translateY(-1px); }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+    }
+    .btn-primary:hover { background: var(--accent-hover); transform: translateY(-1px); }
+
+    .btn-ghost {
+      background: var(--surface);
+      border-color: var(--border);
+      color: var(--text);
+    }
+    .btn-ghost:hover { border-color: var(--border-hover); background: var(--surface-2); }
+
+    .hero-direct-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.1rem;
+      font-size: 0.8rem;
+      color: var(--muted);
+      padding-top: 0.9rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .hero-direct-links a {
+      color: #93c5fd;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .hero-direct-links a:hover { text-decoration: underline; }
+
+    /* Quick-Reference Card */
+    .dossier-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.45rem;
+      box-shadow: 0 20px 45px -15px rgba(0, 0, 0, 0.6);
+    }
+
+    .dossier-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.5rem;
+      padding-bottom: 0.85rem;
+      margin-bottom: 0.95rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .dossier-title {
+      font-family: var(--mono);
+      font-size: 0.74rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #93c5fd;
+    }
+
+    .dossier-block { margin-bottom: 0.85rem; }
+
+    .dossier-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--muted);
+      margin-bottom: 0.25rem;
+      font-weight: 700;
+    }
+
+    .dossier-value {
+      font-size: 0.85rem;
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .role-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.38rem;
+      margin-top: 0.25rem;
+    }
+
+    .role-tag {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      color: #e2e8f0;
+      font-size: 0.73rem;
+      font-weight: 600;
+      padding: 0.22rem 0.55rem;
+      border-radius: 6px;
+    }
+
+    .linkedin-banner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.75rem;
+      background: rgba(10, 102, 194, 0.16);
+      border: 1px solid rgba(59, 130, 246, 0.38);
+      border-radius: 10px;
+      padding: 0.7rem 0.85rem;
+      margin: 0.85rem 0;
+      transition: all 0.15s;
+    }
+
+    .linkedin-banner:hover {
+      background: rgba(10, 102, 194, 0.28);
+      border-color: #60a5fa;
+    }
+
+    .linkedin-banner strong { display: block; font-size: 0.83rem; color: #fff; }
+    .linkedin-banner span { font-size: 0.73rem; color: #93c5fd; font-family: var(--mono); }
+
+    .quick-copy-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.4rem;
+      margin-top: 0.85rem;
+      padding-top: 0.85rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .copy-chip {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      border-radius: 7px;
+      padding: 0.45rem 0.4rem;
+      font-size: 0.72rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.15s;
+    }
+
+    .copy-chip:hover { border-color: var(--accent); color: #fff; }
+    .copy-chip.copied { border-color: var(--emerald); color: #6ee7b7; background: var(--emerald-soft); }
+
+    /* 6-Metric Proof Strip */
+    .proof-strip {
+      background: var(--bg-elevated);
+      border-bottom: 1px solid var(--border);
+      padding: 1.5rem 0;
+    }
+
+    .proof-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 0.9rem;
+    }
+
+    .proof-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 0.85rem 0.9rem;
+    }
+
+    .proof-item strong {
+      display: block;
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.15rem;
+    }
+
+    .proof-item span {
+      font-size: 0.74rem;
+      color: var(--muted);
+      line-height: 1.35;
+      display: block;
+    }
+
+    /* Sections */
+    section { padding: 3.75rem 0; }
+    .section-alt { background: var(--bg-elevated); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .eyebrow {
+      font-family: var(--mono);
+      font-size: 0.73rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #60a5fa;
+      margin-bottom: 0.35rem;
+    }
+
+    .section-head h2 {
+      font-size: clamp(1.45rem, 2.8vw, 1.9rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .section-head p {
+      color: var(--muted);
+      max-width: 560px;
+      font-size: 0.92rem;
+    }
+
+    /* BA Fit Matrix Grid */
+    .fit-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.1rem;
+    }
+
+    .fit-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 13px;
+      padding: 1.35rem;
+    }
+
+    .fit-card-num {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: #6ee7b7;
+      margin-bottom: 0.4rem;
+    }
+
+    .fit-card h3 {
+      font-size: 1.02rem;
+      font-weight: 700;
+      margin-bottom: 0.45rem;
+      color: #fff;
+    }
+
+    .fit-card p {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      line-height: 1.55;
+    }
+
+    /* Experience Timeline & Credentials */
+    .exp-grid {
+      display: grid;
+      grid-template-columns: 1.32fr 0.98fr;
+      gap: 2rem;
+      align-items: start;
+    }
+
+    .timeline {
+      border-left: 2px solid var(--border);
+      padding-left: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.35rem;
+    }
+
+    .tl-item {
+      position: relative;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.2rem 1.3rem;
+    }
+
+    .tl-item::before {
+      content: "";
+      position: absolute;
+      left: -1.92rem;
+      top: 1.35rem;
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: 2px solid var(--bg);
+    }
+
+    .tl-item.active::before {
+      background: var(--emerald);
+      box-shadow: 0 0 8px var(--emerald);
+    }
+
+    .tl-period {
+      font-family: var(--mono);
+      font-size: 0.73rem;
+      color: #93c5fd;
+      font-weight: 600;
+      margin-bottom: 0.2rem;
+    }
+
+    .tl-item h3 {
+      font-size: 1.01rem;
+      font-weight: 700;
+    }
+
+    .tl-org {
+      font-size: 0.82rem;
+      color: var(--muted);
+      margin-bottom: 0.55rem;
+    }
+
+    .tl-bullets {
+      list-style: none;
+      font-size: 0.84rem;
+      color: var(--text-secondary);
+    }
+
+    .tl-bullets li {
+      padding: 0.2rem 0 0.2rem 1rem;
+      position: relative;
+    }
+
+    .tl-bullets li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: #60a5fa;
+      font-weight: 700;
+    }
+
+    .cred-panel {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.4rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .cred-panel h3 {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #93c5fd;
+      margin-bottom: 0.9rem;
+    }
+
+    .cred-item {
+      padding-bottom: 0.72rem;
+      margin-bottom: 0.72rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .cred-item:last-of-type { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+    .cred-item strong { display: block; font-size: 0.87rem; color: #fff; }
+    .cred-item span { font-size: 0.77rem; color: var(--muted); }
+
+    .domain-group { margin-bottom: 0.9rem; }
+    .domain-group:last-child { margin-bottom: 0; }
+
+    .domain-title {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #cbd5e1;
+      margin-bottom: 0.38rem;
+    }
+
+    .stack-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+    }
+
+    .stack-pill {
+      font-family: var(--mono);
+      font-size: 0.69rem;
+      padding: 0.22rem 0.5rem;
+      border-radius: 5px;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+    }
+
+    /* AI PoC Spotlight */
+    .spotlight {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.08), rgba(59, 130, 246, 0.12));
+      border: 1px solid rgba(59, 130, 246, 0.38);
+      border-radius: 16px;
+      padding: 1.6rem;
+      margin-bottom: 1.65rem;
+      display: grid;
+      grid-template-columns: 1.38fr 1fr;
+      gap: 1.6rem;
+      align-items: center;
+    }
+
+    .spotlight-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      font-family: var(--mono);
+      font-size: 0.71rem;
+      font-weight: 700;
+      color: #6ee7b7;
+      background: rgba(6, 78, 59, 0.6);
+      border: 1px solid rgba(16, 185, 129, 0.35);
+      padding: 0.25rem 0.65rem;
+      border-radius: 6px;
+      margin-bottom: 0.7rem;
+    }
+
+    .spotlight h3 {
+      font-size: 1.24rem;
+      font-weight: 800;
+      margin-bottom: 0.45rem;
+    }
+
+    .spotlight p {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      margin-bottom: 1rem;
+    }
+
+    .chaos-summary {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+      margin-bottom: 1rem;
+    }
+
+    .chaos-pill {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      background: rgba(6, 10, 18, 0.75);
+      border: 1px solid var(--border);
+      color: #cbd5e1;
+      padding: 0.22rem 0.55rem;
+      border-radius: 5px;
+    }
+
+    .scenario-links {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .scenario-link {
+      background: rgba(6, 10, 18, 0.8);
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      padding: 0.6rem 0.85rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.81rem;
+      transition: all 0.15s;
+    }
+
+    .scenario-link:hover {
+      border-color: var(--emerald);
+      transform: translateX(3px);
+    }
+
+    .scenario-link strong { color: #fff; display: block; font-size: 0.82rem; }
+    .scenario-link span { color: var(--muted); font-size: 0.72rem; }
+
+    /* Contact Hub */
+    .contact-hub {
+      background: linear-gradient(135deg, #0f172a, #172554);
+      border: 1px solid rgba(59, 130, 246, 0.38);
+      border-radius: 18px;
+      padding: 2.5rem 2rem;
+      text-align: center;
+    }
+
+    .contact-hub h2 {
+      font-size: clamp(1.45rem, 2.8vw, 1.95rem);
+      font-weight: 800;
+      margin-bottom: 0.6rem;
+    }
+
+    .contact-hub p {
+      color: var(--text-secondary);
+      max-width: 640px;
+      margin: 0 auto 1.6rem;
+      font-size: 0.94rem;
+    }
+
+    .contact-buttons {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .contact-foot {
+      font-size: 0.83rem;
+      color: var(--muted);
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 1.65rem 0;
+      color: var(--muted);
+      font-size: 0.81rem;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 1.25rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a:hover { color: #fff; }
+
+    @media (max-width: 1080px) {
+      .proof-grid { grid-template-columns: repeat(3, 1fr); }
+      .fit-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 920px) {
+      .hero-grid, .spotlight, .exp-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links, .nav-actions { display: none; }
+      .mobile-menu-btn { display: inline-block; }
+      .proof-grid, .fit-grid { grid-template-columns: 1fr; }
+      .quick-copy-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav>
+    <div class="nav-inner">
+      <a href="#top" class="brand">
+        <div class="brand-mark">SS</div>
+        <div class="brand-text">
+          <strong>Sashidhar Sripadanna</strong>
+          <span>IT Business Analyst · AI Product &amp; Service Operations Bridge</span>
+        </div>
+      </a>
+
+      <div class="nav-links">
+        <a href="#ba-fit">How I Work (BA Fit)</a>
+        <a href="#experience">13+ Yrs Technical &amp; Ops Soul</a>
+        <a href="#ai-poc" class="nav-live"><span class="pulse-dot"></span>AI Agent &amp; Drift PoCs</a>
+        <a href="index.html">Full Portfolio ↗</a>
+        <a href="#contact">Contact</a>
+      </div>
+
+      <div class="nav-actions">
+        <a href="https://www.linkedin.com/in/sashidhar-s-6a6662186" target="_blank" rel="noopener" class="icon-btn icon-btn-li">
+          in LinkedIn ↗
+        </a>
+        <a href="https://github.com/Sashidhar2508/complybridge-ai-governance-kit" target="_blank" rel="noopener" class="icon-btn">
+          GitHub Lab ↗
+        </a>
+      </div>
+
+      <button class="mobile-menu-btn" onclick="document.getElementById('mobileDrawer').classList.toggle('open')">Menu ▾</button>
+    </div>
+
+    <div id="mobileDrawer" class="mobile-drawer">
+      <a href="#ba-fit" onclick="this.parentElement.classList.remove('open')">How I Work (IT Business Analyst Fit)</a>
+      <a href="#experience" onclick="this.parentElement.classList.remove('open')">13+ Yrs Systems, Cloud &amp; Support Ops</a>
+      <a href="control-plane.html" style="color:#6ee7b7; font-weight:700;">● Interactive AI PoC Simulator</a>
+      <a href="index.html">Main AI Governance Portfolio ↗</a>
+      <a href="https://www.linkedin.com/in/sashidhar-s-6a6662186" target="_blank" rel="noopener" style="color:#93c5fd; font-weight:700;">in LinkedIn Profile ↗</a>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <header id="top" class="hero">
+    <div class="container">
+      <div class="hero-grid">
+        <div>
+          <div class="availability-pill">
+            ● OPEN TO PUNE / INDIA GCC (HYBRID) · SWEDEN / EU (SANDVIKEN / SOLNA HYBRID)
+          </div>
+          <h1>Turning User Needs &amp; Operational Data into <span>Clear Requirements &amp; Practical AI PoCs</span></h1>
+          <p class="hero-lead">
+            <strong>IT Business Analyst &amp; AI Product Bridge</strong> with <strong>13+ years of US &amp; India enterprise delivery</strong> across systems engineering, cloud infrastructure, networking, and 24/7 support operations. I partner directly with users and technical teams to separate surface requests from root problems, analyze incident/usage trends, prioritize by business value, effort, and risk, and build small, testable AI experiments.
+          </p>
+          <p class="hero-sub">
+            Grounded in real production engineering (Linux/Windows/AIX, TCP/IP, WebLogic/WebSphere, AWS/OCI/Azure, Kubernetes, CI/CD, OIDC) and active AI capability exploration (OCI 2025 AI Associate, IAPP AIGP Candidate, B2B Support RAG Copilot &amp; interactive drift simulator). Pragmatic enough to recommend against features that do not solve the real user problem.
+          </p>
+          <div class="cta-row">
+            <a href="control-plane.html" class="btn btn-emerald">
+              Try Live AI PoC Simulator →
+            </a>
+            <a href="https://www.linkedin.com/in/sashidhar-s-6a6662186" target="_blank" rel="noopener" class="btn btn-linkedin">
+              in Connect on LinkedIn ↗
+            </a>
+            <a href="https://github.com/Sashidhar2508/complybridge-ai-governance-kit" target="_blank" rel="noopener" class="btn btn-primary">
+              Inspect GitHub PoCs ↗
+            </a>
+          </div>
+
+          <div class="hero-direct-links">
+            <a href="https://github.com/Sashidhar2508/complybridge-ai-governance-kit/blob/main/00_Executive_One_Pager_90_Second_Brief.pdf" target="_blank" rel="noopener">📄 1-Page Executive Brief (PDF) ↗</a>
+            <a href="https://github.com/Sashidhar2508/complybridge-ai-governance-kit/blob/main/Project-06-AI-Governance-Control-Plane-and-Policy-Engine/RELEASE_AUDIT_EVIDENCE.md" target="_blank" rel="noopener">🧪 Automated PoC Test Log ↗</a>
+            <a href="index.html">🧭 Full Governance &amp; TAM View ↗</a>
+          </div>
+        </div>
+
+        <!-- Candidate Quick Reference -->
+        <aside class="dossier-card" aria-label="Candidate Quick Reference">
+          <div class="dossier-header">
+            <span class="dossier-title">IT Business Analyst Profile</span>
+            <span style="font-family:var(--mono); font-size:0.71rem; color:#6ee7b7; font-weight:700;">● IMMEDIATE JOINER</span>
+          </div>
+
+          <div class="dossier-block">
+            <div class="dossier-label">Core Focus Areas</div>
+            <div class="role-tags">
+              <span class="role-tag">Requirements &amp; User Stories</span>
+              <span class="role-tag">AI Agent Exploration &amp; PoCs</span>
+              <span class="role-tag">Customer Support Operations</span>
+              <span class="role-tag">Value · Effort · Risk Triage</span>
+            </div>
+          </div>
+
+          <a href="https://www.linkedin.com/in/sashidhar-s-6a6662186" target="_blank" rel="noopener" class="linkedin-banner">
+            <div>
+              <strong>LinkedIn Profile</strong>
+              <span>linkedin.com/in/sashidhar-s-6a6662186</span>
+            </div>
+            <span style="color:#fff; font-weight:700; font-size:0.82rem;">Open ↗</span>
+          </a>
+
+          <div class="dossier-block">
+            <div class="dossier-label">Credentials &amp; Education</div>
+            <div class="dossier-value">OCI 2025 AI Associate &amp; Foundations Associate · IAPP AIGP Candidate · M.S. Computer Engineering (UHCL, USA) · Fluent English</div>
+          </div>
+
+          <div class="dossier-block" style="margin-bottom:0;">
+            <div class="dossier-label">Location &amp; Direct Contact</div>
+            <div class="dossier-value">Hyderabad, India (Open to Pune / Sweden Hybrid) · +91-9515854395 · jssripadanna@outlook.com</div>
+          </div>
+
+          <div class="quick-copy-grid">
+            <button class="copy-chip" onclick="copyText('jssripadanna@outlook.com', this)">Copy Email</button>
+            <button class="copy-chip" onclick="copyText('https://www.linkedin.com/in/sashidhar-s-6a6662186', this)">Copy LinkedIn</button>
+            <button class="copy-chip" onclick="copyText('+91-9515854395', this)">Copy Phone</button>
+            <button class="copy-chip" onclick="copyRecruiterPitch(this)">Copy Summary</button>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </header>
+
+  <!-- 6-Metric Proof Strip -->
+  <div class="proof-strip">
+    <div class="container">
+      <div class="proof-grid">
+        <div class="proof-item">
+          <strong>13+ Years</strong>
+          <span>US &amp; India Enterprise Systems, Cloud &amp; Support Operations</span>
+        </div>
+        <div class="proof-item">
+          <strong>~35% Incident Drop</strong>
+          <span>Ticket/RCA Pattern Analysis Across 20+ Global Accounts</span>
+        </div>
+        <div class="proof-item">
+          <strong>$2M Saved</strong>
+          <span>Zero-Downtime SiteMinder → OCI OIDC Identity Migration</span>
+        </div>
+        <div class="proof-item">
+          <strong>98–99% CSAT</strong>
+          <span>Daily Bridge Between End-Users, Support &amp; Developers</span>
+        </div>
+        <div class="proof-item">
+          <strong>7 Modular Kits</strong>
+          <span>Structured Requirements, Model Cards &amp; Operational Playbooks</span>
+        </div>
+        <div class="proof-item">
+          <strong>Live AI Sandbox</strong>
+          <span>Support RAG &amp; Drift Simulator Tested in CI/CD</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6-Pillar BA Alignment Grid -->
+  <section id="ba-fit" class="section-alt">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">Agile Product &amp; Customer Service Alignment</div>
+          <h2>How My Background Maps to IT Business Analysis</h2>
+        </div>
+        <p>Combining 13+ years of hands-on infrastructure and 24/7 support troubleshooting with structured user discovery, data analysis, and AI prototyping.</p>
+      </div>
+
+      <div class="fit-grid">
+        <div class="fit-card">
+          <div class="fit-card-num">01 · DISCOVERY &amp; PROBLEM FRAMING</div>
+          <h3>Uncovering the Real Process Problem</h3>
+          <p>Worked directly with support teams, application owners, and business stakeholders across 20+ enterprise accounts to separate surface feature requests from underlying workflow bottlenecks.</p>
+        </div>
+
+        <div class="fit-card">
+          <div class="fit-card-num">02 · DATA &amp; USAGE INSIGHTS</div>
+          <h3>Turning Ticket &amp; Incident Trends into Action</h3>
+          <p>Analyzed recurring production incidents, SLA telemetry, and 50+ formal Root Cause Analyses—translating raw operational data into targeted fixes that reduced repeat incidents by ~35%.</p>
+        </div>
+
+        <div class="fit-card">
+          <div class="fit-card-num">03 · VALUE · EFFORT · RISK TRIAGE</div>
+          <h3>Pragmatic Prioritization &amp; Honest Pushback</h3>
+          <p>Evaluated technical trade-offs (such as consolidating legacy SiteMinder onto OCI OIDC to save $2M) and built decision logs that recommend against changes that add complexity without solving user pain.</p>
+        </div>
+
+        <div class="fit-card">
+          <div class="fit-card-num">04 · AI EXPLORATION &amp; SMALL POCs</div>
+          <h3>Testing AI Agents &amp; Support Workflows</h3>
+          <p>Built working reference PoCs—including a Multi-Tenant B2B Support RAG Copilot (<code>SYS-03</code>) and an interactive drift simulator—to test AI disclosures, retrieval guardrails, and human handoffs.</p>
+        </div>
+
+        <div class="fit-card">
+          <div class="fit-card-num">05 · REQUIREMENTS &amp; QA COLLABORATION</div>
+          <h3>Clear User Stories &amp; Acceptance Criteria</h3>
+          <p>Fluent in servers, networking, APIs, cloud, and CI/CD—allowing seamless collaboration with developers, testers, and architects on user stories, edge-case testing, and release readiness.</p>
+        </div>
+
+        <div class="fit-card">
+          <div class="fit-card-num">06 · ADOPTION &amp; ENABLEMENT</div>
+          <h3>Documentation, Training &amp; Smooth Rollouts</h3>
+          <p>Authored operational playbooks, onboarding guides, and handover documentation for a 24/7 global delivery pod—ensuring consistent customer experience across support channels.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Career Track Record (Full Technical Soul + BA Lens) -->
+  <section id="experience">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">Chronological Track Record · April 2010 – Present</div>
+          <h2>13+ Years of Systems, Cloud &amp; Operations Delivery with a BA Lens</h2>
+        </div>
+        <p>Preserving full hands-on depth in servers, networking, middleware, DevOps, and cloud—framed around user needs, prioritization, and measurable outcomes.</p>
+      </div>
+
+      <div class="exp-grid">
+        <div class="timeline">
+          <div class="tl-item active">
+            <div class="tl-period">03/2025 – PRESENT</div>
+            <h3>AI Product &amp; Governance Portfolio Builder (Career Specialization &amp; Open-Source Build)</h3>
+            <div class="tl-org">ComplyBridge Reference Architecture · Remote</div>
+            <ul class="tl-bullets">
+              <li><strong>Support Copilot &amp; AI PoC Exploration:</strong> Designed and tested functional reference workflows for a Multi-Tenant B2B Support RAG Copilot (<code>SYS-03</code>) and synthetic briefing tools (<code>SYS-04</code>), defining upfront AI notices, retrieval boundaries, data retention rules, and human agent escalation criteria.</li>
+              <li><strong>Interactive Drift &amp; Edge-Case Sandbox:</strong> Built a live browser-based Control Plane PoC paired with 14 executable OPA/Rego rules and Python validation scripts in GitHub Actions to test how configuration drift affects AI behavior.</li>
+              <li><strong>Structured Requirements &amp; Playbooks:</strong> Authored 7 modular open-source toolkits translating ambiguous business and regulatory constraints (EU AI Act, ISO/IEC 42001, NIST AI RMF, GDPR, DPDP) into testable acceptance checklists, Model Cards, and incident runbooks.</li>
+            </ul>
+          </div>
+
+          <div class="tl-item">
+            <div class="tl-period">09/2022 – 05/2025</div>
+            <h3>Lead Cloud &amp; Operations Specialist (Technical Account &amp; Business Analysis Bridge)</h3>
+            <div class="tl-org">CBTS · India</div>
+            <ul class="tl-bullets">
+              <li><strong>Stakeholder Discovery &amp; Data-Driven Prioritization:</strong> Primary analytical and operational liaison across <strong>20+ global enterprise accounts</strong>; partnered with support queues and stakeholders to analyze recurring incident/usage patterns and convert findings into prioritized backlog and change actions.</li>
+              <li><strong>Incident &amp; Queue Reduction (~35% Drop):</strong> Instituted structured Root Cause Analysis (RCA) and operational telemetry reviews that cut recurring production incidents by <strong>~35%</strong> while sustaining <strong>99.9% availability</strong> and <strong>98–99% CSAT</strong>.</li>
+              <li><strong>Business Value vs. Risk Trade-Offs ($2M Savings):</strong> Led zero-downtime enterprise identity migration (CA SiteMinder → OpenID Connect on OCI) saving <strong>$2M</strong>; translated authentication flows and risk trade-offs into clear stakeholder recommendations and acceptance criteria.</li>
+              <li><strong>Service Delivery, Documentation &amp; Training:</strong> Owned SLA governance, IAM access reviews, DR/RTO/RPO validations, and onboarding/training guides for a <strong>5-member 24/7 global delivery team</strong>.</li>
+            </ul>
+          </div>
+
+          <div class="tl-item">
+            <div class="tl-period">09/2021 – 09/2022</div>
+            <h3>Senior Cloud, DevOps &amp; Middleware Engineer (Technical Lead)</h3>
+            <div class="tl-org">Global Gate IT Solutions LLC · USA</div>
+            <ul class="tl-bullets">
+              <li><strong>Cross-Functional Requirements &amp; Release Delivery:</strong> Collaborated daily with application owners, developers, and QA teams across <strong>15+ US enterprise environments</strong> to clarify operational needs, prioritize CI/CD and infrastructure stories (Jenkins, Docker, Kubernetes, Terraform, Ansible), and validate acceptance criteria.</li>
+              <li><strong>Platform Operations &amp; Risk Reporting:</strong> Led WebLogic, WebSphere, and Apache/Tomcat middleware operations alongside change-management governance, patching compliance, IAM audits, and executive reviews (<strong>98% CSAT</strong>).</li>
+            </ul>
+          </div>
+
+          <div class="tl-item">
+            <div class="tl-period">09/2015 – 08/2021</div>
+            <h3>Cloud, DevOps &amp; Enterprise Middleware Engineer</h3>
+            <div class="tl-org">Global Gate IT Solutions LLC · USA</div>
+            <ul class="tl-bullets">
+              <li><strong>Full-Stack Troubleshooting &amp; Root-Cause Engineering:</strong> Engineered, troubleshot, and maintained 24/7 high-availability <strong>Linux, Windows, and AIX servers</strong>, <strong>TCP/IP network routing/load balancers</strong>, middleware clusters, and <strong>AWS/OCI cloud workloads</strong>.</li>
+              <li><strong>Process Standardization &amp; Documentation:</strong> Partnered with security, compliance, and product teams to execute <strong>50+ formal post-incident RCAs</strong>, standardize automated deployments, and write operational runbooks that reduced friction between platform engineers and application teams.</li>
+            </ul>
+          </div>
+
+          <div class="tl-item">
+            <div class="tl-period">04/2010 – 08/2015</div>
+            <h3>Systems, Network &amp; Middleware Administrator</h3>
+            <div class="tl-org">Global Gate IT Solutions LLC / GDS · USA &amp; India</div>
+            <ul class="tl-bullets">
+              <li><strong>Core Systems, Networking &amp; Support Triage:</strong> Administered and troubleshot enterprise <strong>Linux/UNIX/Windows servers, TCP/IP networking, firewalls, DNS/load balancers, and Java/J2EE middleware stacks</strong>, partnering with cross-functional support teams to resolve production incidents and maintain 24/7 reliability.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Right Column: Credentials + Technical & BA Stack -->
+        <div>
+          <aside class="cred-panel">
+            <h3>Certifications, Education &amp; Languages</h3>
+
+            <div class="cred-item">
+              <strong>Oracle Cloud Infrastructure 2025 AI Associate (Active)</strong>
+              <span>Generative AI, LLM Architecture, RAG Patterns &amp; OCI AI Services</span>
+            </div>
+
+            <div class="cred-item">
+              <strong>Oracle Cloud Infrastructure 2025 Foundations Associate (Active)</strong>
+              <span>Cloud Architecture, IAM, Networking &amp; Operational Governance</span>
+            </div>
+
+            <div class="cred-item">
+              <strong>IAPP AI Governance Professional (AIGP) — Candidate</strong>
+              <span>EU AI Act, NIST AI RMF, ISO/IEC 42001 &amp; Data Privacy Governance</span>
+            </div>
+
+            <div class="cred-item">
+              <strong>AWS Certified Solutions Architect – Associate &amp; IBM Infrastructure Specialist</strong>
+              <span>Prior Enterprise Cloud &amp; Systems Credentials</span>
+            </div>
+
+            <div class="cred-item">
+              <strong>M.S. in Computer Engineering (2012) &amp; B.E. ECE (2010)</strong>
+              <span>University of Houston-Clear Lake (USA) · SRKR Engineering College (India)</span>
+            </div>
+
+            <div class="cred-item">
+              <strong>Fluent English Stakeholder &amp; Written Communication</strong>
+              <span>11+ years working directly with US &amp; global teams, documentation &amp; executive reporting</span>
+            </div>
+          </aside>
+
+          <aside class="cred-panel" style="margin-bottom:0;">
+            <h3>Technical &amp; Business Analysis Capabilities</h3>
+
+            <div class="domain-group">
+              <div class="domain-title">1. Business Analysis &amp; Agile Delivery</div>
+              <div class="stack-pills">
+                <span class="stack-pill">User &amp; Stakeholder Interviews</span>
+                <span class="stack-pill">User Stories &amp; Acceptance Criteria</span>
+                <span class="stack-pill">Value · Effort · Risk Triage</span>
+                <span class="stack-pill">Incident &amp; Usage Analytics</span>
+                <span class="stack-pill">UAT &amp; Regression Support</span>
+                <span class="stack-pill">Training &amp; Runbooks</span>
+              </div>
+            </div>
+
+            <div class="domain-group">
+              <div class="domain-title">2. AI Exploration &amp; Practical PoCs</div>
+              <div class="stack-pills">
+                <span class="stack-pill">Support RAG Workflows</span>
+                <span class="stack-pill">AI Agent Edge-Case Testing</span>
+                <span class="stack-pill">OPA / Rego Guardrails</span>
+                <span class="stack-pill">Python Validation Scripts</span>
+                <span class="stack-pill">Human-in-the-Loop Design</span>
+                <span class="stack-pill">Model Cards</span>
+              </div>
+            </div>
+
+            <div class="domain-group">
+              <div class="domain-title">3. Cloud, DevOps &amp; Systems Soul (13+ Yrs Production)</div>
+              <div class="stack-pills">
+                <span class="stack-pill">OCI · AWS · Azure · GCP</span>
+                <span class="stack-pill">Linux · Windows · AIX</span>
+                <span class="stack-pill">TCP/IP · DNS · Load Balancers</span>
+                <span class="stack-pill">WebLogic · WebSphere · Tomcat</span>
+                <span class="stack-pill">Kubernetes · Docker</span>
+                <span class="stack-pill">Terraform · Ansible · Jenkins</span>
+                <span class="stack-pill">OIDC · CA SiteMinder</span>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive AI PoC Spotlight -->
+  <section id="ai-poc" class="section-alt">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">Hands-On AI Capability Exploration · Live Sandbox</div>
+          <h2>Proof-of-Concept: Testing AI Support Copilots &amp; Guardrails</h2>
+        </div>
+        <p>Built to test how AI assistants behave under real operational changes—and how clear acceptance criteria prevent silent failures before users are impacted.</p>
+      </div>
+
+      <div class="spotlight">
+        <div>
+          <div class="spotlight-badge">● INTERACTIVE SANDBOX · LIVE BROWSER POC</div>
+          <h3>AI Control Plane &amp; Configuration Drift Simulator</h3>
+          <p>
+            Select any of the four reference AI systems—including the <strong>Multi-Tenant B2B Support RAG Copilot (<code>SYS-03</code>)</strong>—and toggle simulated changes such as region failover, Zero-Data-Retention removal, human-oversight bypass, or stripped AI interaction banners to inspect how automated release gates respond.
+          </p>
+          <div class="chaos-summary">
+            <span class="chaos-pill">✓ B2B Support RAG Tested</span>
+            <span class="chaos-pill">✓ Human Escalation Gates</span>
+            <span class="chaos-pill">✓ Open-Source Code on GitHub</span>
+          </div>
+          <div class="cta-row" style="margin-bottom:0;">
+            <a href="control-plane.html" class="btn btn-emerald">Launch Interactive Simulator →</a>
+            <a href="https://github.com/Sashidhar2508/complybridge-ai-governance-kit" target="_blank" rel="noopener" class="btn btn-ghost">Explore 7-Kit GitHub Repo ↗</a>
+          </div>
+        </div>
+
+        <div class="scenario-links">
+          <a href="control-plane.html" class="scenario-link">
+            <div>
+              <strong>SYS-03 (VF-02) · Multi-Tenant B2B Support RAG</strong>
+              <span>Customer Support Copilot · AI Disclosure, Tenant Isolation &amp; ZDR Gate</span>
+            </div>
+            <span style="color:#6ee7b7; font-weight:700;">Test →</span>
+          </a>
+          <a href="control-plane.html" class="scenario-link">
+            <div>
+              <strong>SYS-04 (LG-09) · Synthetic Briefing &amp; Summary Tool</strong>
+              <span>GenAI Text/Audio Output · Provenance &amp; Metadata Tagging</span>
+            </div>
+            <span style="color:#6ee7b7; font-weight:700;">Test →</span>
+          </a>
+          <a href="control-plane.html" class="scenario-link">
+            <div>
+              <strong>SYS-01 (FF-06) · High-Risk Decision Triage Engine</strong>
+              <span>Human-in-the-Loop Escalation &amp; Regional Failover Guardrails</span>
+            </div>
+            <span style="color:#6ee7b7; font-weight:700;">Test →</span>
+          </a>
+          <a href="control-plane.html" class="scenario-link">
+            <div>
+              <strong>SYS-02 (HR-04) · Structured Candidate Screener</strong>
+              <span>Advisory Scoring Mode · Human Review &amp; Bias Filter Checks</span>
+            </div>
+            <span style="color:#6ee7b7; font-weight:700;">Test →</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Hub -->
+  <section id="contact">
+    <div class="container">
+      <div class="contact-hub">
+        <h2>Ready to Discuss IT Business Analyst &amp; AI Product Exploration Roles</h2>
+        <p>
+          Available immediately for hybrid roles in <strong>Pune, India</strong> or <strong>Sweden (Sandviken / Solna)</strong>, bringing 13+ years of systems, cloud, and support operations fluency together with hands-on AI prototyping.
+        </p>
+        <div class="contact-buttons">
+          <a href="https://www.linkedin.com/in/sashidhar-s-6a6662186" target="_blank" rel="noopener" class="btn btn-linkedin">
+            in Message on LinkedIn ↗
+          </a>
+          <a href="mailto:jssripadanna@outlook.com?subject=IT%20Business%20Analyst%20(R0098828)%20-%20Sashidhar%20Sripadanna" class="btn btn-emerald">
+            Email: jssripadanna@outlook.com
+          </a>
+          <a href="control-plane.html" class="btn btn-primary">
+            Open AI PoC Simulator →
+          </a>
+          <a href="https://github.com/Sashidhar2508/complybridge-ai-governance-kit" target="_blank" rel="noopener" class="btn btn-ghost">
+            GitHub Repository ↗
+          </a>
+        </div>
+        <div class="contact-foot">
+          Sashidhar Sripadanna · Hyderabad, India (Open to Pune / Sweden Hybrid) · +91-9515854395 · linkedin.com/in/sashidhar-s-6a6662186
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <div>© 2025–2026 Sashidhar Sripadanna · IT Business Analyst · AI Product &amp; Service Operations Bridge</div>
+        <div class="footer-links">
+          <a href="https://www.linkedin.com/in/sashidhar-s-6a6662186" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="https://github.com/Sashidhar2508/complybridge-ai-governance-kit" target="_blank" rel="noopener">GitHub Repo</a>
+          <a href="control-plane.html">AI PoC Simulator</a>
+          <a href="index.html">Full Portfolio</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function copyText(value, btn) {
+      navigator.clipboard.writeText(value).then(() => {
+        const original = btn.textContent;
+        btn.textContent = 'Copied ✓';
+        btn.classList.add('copied');
+        setTimeout(() => {
+          btn.textContent = original;
+          btn.classList.remove('copied');
+        }, 1800);
+      });
+    }
+
+    function copyRecruiterPitch(btn) {
+      const pitch = "Sashidhar Sripadanna — IT Business Analyst & AI Product Bridge (13+ Yrs US & India Enterprise Systems, Cloud, DevOps & 24/7 Support Operations; ~35% incident reduction, $2M OIDC migration, 98-99% CSAT) with hands-on AI Support Copilot & drift sandbox PoCs (OCI 2025 AI Associate, IAPP AIGP Candidate, M.S. Computer Engineering UHCL). Tailored BA Page: https://sashidhar2508.github.io/website/ba.html | LinkedIn: https://www.linkedin.com/in/sashidhar-s-6a6662186";
+      copyText(pitch, btn);
+    }
+  </script>
+</body>
+</html>
