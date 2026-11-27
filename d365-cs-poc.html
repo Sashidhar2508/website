@@ -1,0 +1,1239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dynamics 365 Customer Service &amp; Copilot Functional PoC | Sashidhar Sripadanna</title>
+  <meta name="description" content="Applied IT Business Analyst functional architecture and interactive case triage PoC mapping enterprise B2B support operations onto Microsoft Dynamics 365 Customer Service, Power Platform, and Copilot Studio." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #060a12;
+      --bg-elevated: #0b1120;
+      --surface: #10192c;
+      --surface-2: #16223b;
+      --border: #22314e;
+      --border-hover: #3b588c;
+      --text: #f8fafc;
+      --text-secondary: #cbd5e1;
+      --muted: #94a3b8;
+      --accent: #3b82f6;
+      --accent-hover: #2563eb;
+      --accent-soft: rgba(59, 130, 246, 0.14);
+      --emerald: #10b981;
+      --emerald-soft: rgba(16, 185, 129, 0.14);
+      --amber: #f59e0b;
+      --amber-soft: rgba(245, 158, 11, 0.14);
+      --red: #ef4444;
+      --red-soft: rgba(239, 68, 68, 0.14);
+      --linkedin: #0a66c2;
+      --mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    code {
+      font-family: var(--mono);
+      font-size: 0.84em;
+      background: rgba(15, 23, 42, 0.85);
+      padding: 0.12rem 0.38rem;
+      border-radius: 4px;
+      border: 1px solid var(--border);
+      color: #93c5fd;
+    }
+
+    /* Navigation */
+    nav {
+      background: rgba(6, 10, 18, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0.8rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .brand-mark {
+      width: 36px;
+      height: 36px;
+      border-radius: 9px;
+      background: linear-gradient(135deg, var(--accent), var(--emerald));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 0.88rem;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .brand-text strong { display: block; font-size: 0.98rem; font-weight: 700; }
+    .brand-text span { display: block; font-size: 0.72rem; color: var(--muted); }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      font-size: 0.83rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+    }
+
+    .nav-links a:hover { color: #fff; }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+    }
+
+    .icon-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.46rem 0.85rem;
+      border-radius: 7px;
+      font-size: 0.79rem;
+      font-weight: 600;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text);
+      transition: all 0.15s ease;
+    }
+
+    .icon-btn:hover { border-color: var(--border-hover); background: var(--surface-2); }
+    .icon-btn-li { background: var(--linkedin); border-color: var(--linkedin); color: #fff; }
+    .icon-btn-li:hover { background: #004182; border-color: #004182; }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* Hero */
+    .poc-hero {
+      padding: 2.5rem 0 2rem;
+      background:
+        radial-gradient(circle at 14% 20%, rgba(59, 130, 246, 0.14), transparent 42%),
+        radial-gradient(circle at 86% 15%, rgba(16, 185, 129, 0.11), transparent 42%),
+        var(--bg);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .poc-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      font-family: var(--mono);
+      font-size: 0.71rem;
+      font-weight: 700;
+      color: #6ee7b7;
+      background: var(--emerald-soft);
+      border: 1px solid rgba(16, 185, 129, 0.35);
+      padding: 0.28rem 0.75rem;
+      border-radius: 999px;
+      margin-bottom: 0.8rem;
+    }
+
+    .poc-hero h1 {
+      font-size: clamp(1.65rem, 3.1vw, 2.3rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.55rem;
+    }
+
+    .poc-hero h1 span {
+      background: linear-gradient(90deg, #60a5fa, #34d399);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .poc-hero p {
+      max-width: 860px;
+      color: var(--text-secondary);
+      font-size: 0.94rem;
+    }
+
+    .honest-note {
+      margin-top: 1.05rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--emerald);
+      border-radius: 8px;
+      padding: 0.72rem 1rem;
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+      max-width: 940px;
+    }
+
+    /* Section Commons */
+    section { padding: 2.75rem 0; }
+    .section-alt {
+      background: var(--bg-elevated);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .step-label {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #93c5fd;
+      margin-bottom: 0.65rem;
+    }
+
+    .section-title {
+      font-size: clamp(1.35rem, 2.5vw, 1.75rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.35rem;
+    }
+
+    .section-sub {
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-bottom: 1.5rem;
+      max-width: 720px;
+    }
+
+    /* Scenario Selector Grid */
+    .scn-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.85rem;
+      margin-bottom: 1.35rem;
+    }
+
+    .scn-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1rem;
+      text-align: left;
+      cursor: pointer;
+      color: var(--text);
+      transition: all 0.15s ease;
+    }
+
+    .scn-card:hover { border-color: var(--border-hover); background: var(--surface-2); }
+    .scn-card.active {
+      border-color: var(--emerald);
+      background: linear-gradient(180deg, rgba(16, 185, 129, 0.11), var(--surface));
+      box-shadow: 0 0 0 1px rgba(16, 185, 129, 0.35);
+    }
+
+    .scn-top {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: #60a5fa;
+      margin-bottom: 0.3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .scn-tag {
+      font-size: 0.64rem;
+      padding: 0.12rem 0.42rem;
+      border-radius: 4px;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+    }
+
+    .scn-card strong {
+      display: block;
+      font-size: 0.9rem;
+      margin-bottom: 0.28rem;
+      line-height: 1.3;
+    }
+
+    .scn-card span {
+      display: block;
+      font-size: 0.75rem;
+      color: var(--muted);
+      line-height: 1.35;
+    }
+
+    /* Controls Bar */
+    .controls-bar {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 0.95rem 1.2rem;
+      margin-bottom: 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .toggle-group {
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      flex-wrap: wrap;
+    }
+
+    .mode-btn {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      padding: 0.46rem 0.85rem;
+      border-radius: 7px;
+      font-size: 0.79rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .mode-btn:hover { border-color: var(--border-hover); color: #fff; }
+    .mode-btn.active {
+      background: var(--emerald-soft);
+      border-color: var(--emerald);
+      color: #6ee7b7;
+    }
+
+    /* Workspace Split */
+    .workspace-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 1.25fr;
+      gap: 1.35rem;
+      align-items: start;
+    }
+
+    .panel {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.35rem;
+    }
+
+    .panel-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 0.75rem;
+      margin-bottom: 0.95rem;
+      border-bottom: 1px solid var(--border);
+      gap: 0.5rem;
+    }
+
+    .panel-head h2 {
+      font-size: 0.96rem;
+      font-weight: 700;
+    }
+
+    .ticket-bubble {
+      background: #070b14;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .ticket-meta {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: #93c5fd;
+      margin-bottom: 0.45rem;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .ticket-text {
+      font-size: 0.86rem;
+      color: var(--text);
+      line-height: 1.55;
+    }
+
+    .copilot-box {
+      background: rgba(59, 130, 246, 0.08);
+      border: 1px solid rgba(59, 130, 246, 0.32);
+      border-radius: 10px;
+      padding: 0.95rem 1rem;
+    }
+
+    .copilot-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.45rem;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .copilot-title {
+      font-family: var(--mono);
+      font-size: 0.73rem;
+      font-weight: 700;
+      color: #93c5fd;
+    }
+
+    .conf-badge {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      padding: 0.14rem 0.48rem;
+      border-radius: 4px;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      color: #6ee7b7;
+      font-weight: 700;
+    }
+
+    .copilot-reply {
+      font-size: 0.83rem;
+      color: var(--text-secondary);
+      line-height: 1.52;
+    }
+
+    .ai-notice-strip {
+      margin-top: 0.65rem;
+      padding-top: 0.55rem;
+      border-top: 1px dashed var(--border);
+      font-family: var(--mono);
+      font-size: 0.69rem;
+      color: var(--muted);
+    }
+
+    /* Right Panel: D365 Case Form & Routing Output */
+    .outcome-banner {
+      border-radius: 11px;
+      padding: 0.95rem 1.1rem;
+      margin-bottom: 1rem;
+      border: 1px solid;
+    }
+
+    .outcome-deflected {
+      background: var(--emerald-soft);
+      border-color: rgba(16, 185, 129, 0.45);
+    }
+
+    .outcome-routed {
+      background: var(--accent-soft);
+      border-color: rgba(59, 130, 246, 0.45);
+    }
+
+    .outcome-urgent {
+      background: var(--amber-soft);
+      border-color: rgba(245, 158, 11, 0.48);
+    }
+
+    .outcome-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.3rem;
+      flex-wrap: wrap;
+    }
+
+    .outcome-status {
+      font-family: var(--mono);
+      font-size: 0.82rem;
+      font-weight: 800;
+    }
+
+    .outcome-deflected .outcome-status { color: #6ee7b7; }
+    .outcome-routed .outcome-status { color: #93c5fd; }
+    .outcome-urgent .outcome-status { color: #fcd34d; }
+
+    .sla-pill {
+      font-family: var(--mono);
+      font-size: 0.71rem;
+      font-weight: 700;
+      padding: 0.16rem 0.52rem;
+      border-radius: 4px;
+      background: rgba(6, 10, 18, 0.75);
+      border: 1px solid var(--border);
+      color: #fff;
+    }
+
+    .outcome-desc {
+      font-size: 0.84rem;
+      color: var(--text-secondary);
+    }
+
+    .d365-fields {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.7rem;
+      margin-bottom: 1rem;
+    }
+
+    .field-card {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      padding: 0.7rem 0.8rem;
+    }
+
+    .field-card span {
+      display: block;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--muted);
+      font-weight: 700;
+      margin-bottom: 0.18rem;
+    }
+
+    .field-card strong {
+      font-size: 0.82rem;
+      color: #fff;
+      display: block;
+    }
+
+    .ba-trace-box {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      padding: 0.85rem 0.95rem;
+      font-size: 0.81rem;
+      color: var(--text-secondary);
+    }
+
+    .ba-trace-box strong {
+      display: block;
+      color: #6ee7b7;
+      font-family: var(--mono);
+      font-size: 0.71rem;
+      text-transform: uppercase;
+      margin-bottom: 0.3rem;
+    }
+
+    /* BA Artifacts Tabs */
+    .artifact-tabs {
+      display: flex;
+      gap: 0.55rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.25rem;
+    }
+
+    .art-btn {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      padding: 0.58rem 0.95rem;
+      border-radius: 9px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .art-btn:hover { border-color: var(--border-hover); color: #fff; }
+    .art-btn.active {
+      background: var(--emerald);
+      border-color: var(--emerald);
+      color: #042f2e;
+      font-weight: 700;
+    }
+
+    .art-panel {
+      display: none;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.55rem;
+    }
+
+    .art-panel.active { display: block; }
+
+    .flow-chain {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 0.65rem;
+      margin: 1.1rem 0 1.25rem;
+    }
+
+    .flow-node {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 0.85rem 0.75rem;
+    }
+
+    .flow-node span {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      color: #60a5fa;
+      font-weight: 700;
+      display: block;
+      margin-bottom: 0.25rem;
+    }
+
+    .flow-node strong {
+      font-size: 0.86rem;
+      display: block;
+      margin-bottom: 0.25rem;
+    }
+
+    .flow-node p {
+      font-size: 0.75rem;
+      color: var(--muted);
+      line-height: 1.38;
+    }
+
+    .story-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+
+    .story-card {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: 11px;
+      padding: 1.1rem;
+    }
+
+    .story-id {
+      font-family: var(--mono);
+      font-size: 0.71rem;
+      font-weight: 700;
+      color: #6ee7b7;
+      margin-bottom: 0.35rem;
+    }
+
+    .story-card h4 {
+      font-size: 0.94rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .story-card p {
+      font-size: 0.81rem;
+      color: var(--text-secondary);
+      margin-bottom: 0.65rem;
+    }
+
+    .ac-box {
+      background: #070b14;
+      border: 1px solid var(--border);
+      border-radius: 7px;
+      padding: 0.65rem 0.75rem;
+      font-size: 0.76rem;
+      color: var(--muted);
+      line-height: 1.45;
+    }
+
+    table.sla-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.82rem;
+    }
+
+    table.sla-table th, table.sla-table td {
+      text-align: left;
+      padding: 0.75rem 0.85rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    table.sla-table th {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      color: #93c5fd;
+      background: var(--bg-elevated);
+    }
+
+    table.sla-table td { color: var(--text-secondary); }
+
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.9rem;
+    }
+
+    .kpi-card {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1rem;
+    }
+
+    .kpi-card strong {
+      display: block;
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: #6ee7b7;
+      margin-bottom: 0.2rem;
+    }
+
+    .kpi-card h4 {
+      font-size: 0.86rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .kpi-card p {
+      font-size: 0.76rem;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 1.65rem 0;
+      color: var(--muted);
+      font-size: 0.8rem;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 1.25rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a:hover { color: #fff; }
+
+    @media (max-width: 1024px) {
+      .scn-grid, .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+      .workspace-grid, .story-grid { grid-template-columns: 1fr; }
+      .flow-chain { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 640px) {
+      .scn-grid, .d365-fields, .flow-chain, .kpi-grid { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav>
+    <div class="nav-inner">
+      <a href="ba.html" class="brand">
+        <div class="brand-mark">SS</div>
+        <div class="brand-text">
+          <strong>Sashidhar Sripadanna</strong>
+          <span>IT Business Analyst · Dynamics 365 Customer Service &amp; AI PoC</span>
+        </div>
+      </a>
+
+      <div class="nav-links">
+        <a href="ba.html">← IT BA Profile</a>
+        <a href="#simulator">Interactive Case Triage</a>
+        <a href="#ba-artifacts">BA Blueprint &amp; User Stories</a>
+        <a href="control-plane.html">AI Governance Sandbox ↗</a>
+      </div>
+
+      <div class="nav-actions">
+        <a href="https://www.linkedin.com/in/sashidhar-s-6a6662186" target="_blank" rel="noopener" class="icon-btn icon-btn-li">in LinkedIn ↗</a>
+        <a href="index.html" class="icon-btn">Full Portfolio ↗</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <header class="poc-hero">
+    <div class="container">
+      <div class="poc-badge">● APPLIED IT BUSINESS ANALYST POC · OUT-OF-THE-BOX FIRST</div>
+      <h1>Dynamics 365 Customer Service &amp; <span>Copilot Studio Support Architecture</span></h1>
+      <p>
+        An applied functional blueprint and interactive triage simulator modeling how an enterprise B2B industrial support desk reduces repeat Tier-2 escalations, enforces Entitlement-driven SLAs, and pairs <strong>Microsoft Copilot Studio</strong> with standard <strong>Dynamics 365 Customer Service</strong> entities—without custom code bloat.
+      </p>
+      <div class="honest-note">
+        <strong>Architecture &amp; Context Note:</strong> Built as a functional prototyping exercise translating my 13+ years of global enterprise support operations (~35% repeat-incident reduction across 20+ accounts) and RAG copilot guardrails onto Microsoft Dynamics 365 Customer Service, Power Automate, and Copilot Studio.
+      </div>
+    </div>
+  </header>
+
+  <!-- Interactive Simulator -->
+  <main id="simulator">
+    <section>
+      <div class="container">
+        <div class="step-label">Step 1 · Select Incoming B2B Industrial Support Scenario</div>
+        <div class="scn-grid" id="scnGrid">
+          <button class="scn-card active" onclick="selectScenario('SCN-01', this)">
+            <div class="scn-top"><span>SCN-01 · KB DEFLECTION</span><span class="scn-tag">COPILOT STUDIO</span></div>
+            <strong>CNC Insert Grade &amp; Feed-Rate Query</strong>
+            <span>Routine technical guidance resolved via verified Knowledge Article before human queue entry.</span>
+          </button>
+
+          <button class="scn-card" onclick="selectScenario('SCN-02', this)">
+            <div class="scn-top"><span>SCN-02 · SEV-1 + ERP</span><span class="scn-tag">PLATINUM SLA</span></div>
+            <strong>Line Stoppage &amp; ERP Batch Delay</strong>
+            <span>High-severity customer incident triggering read-only ERP order lookup &amp; 15-min SLA timer.</span>
+          </button>
+
+          <button class="scn-card" onclick="selectScenario('SCN-03', this)">
+            <div class="scn-top"><span>SCN-03 · RCA PATTERN</span><span class="scn-tag">ANALYTICS</span></div>
+            <strong>Repeat Drill Wear (3rd Ticket in 14d)</strong>
+            <span>Routing rule flags recurring SKU defect trend for BA Root-Cause Analysis &amp; KB update.</span>
+          </button>
+
+          <button class="scn-card" onclick="selectScenario('SCN-04', this)">
+            <div class="scn-top"><span>SCN-04 · OOTB TRIAGE</span><span class="scn-tag">SCOPE GUARD</span></div>
+            <strong>Custom Portal Widget Request</strong>
+            <span>Ambiguous commercial/UI ask routed to BA &amp; Entitlements review to avoid custom code debt.</span>
+          </button>
+        </div>
+
+        <!-- Step 2: Mode Toggle -->
+        <div class="controls-bar">
+          <div>
+            <div class="step-label" style="margin-bottom:0.15rem;">Step 2 · Copilot Studio &amp; Automation Mode</div>
+            <span style="font-size:0.8rem; color:var(--muted);">Compare automated AI deflection + routing against human-only agent assist.</span>
+          </div>
+          <div class="toggle-group">
+            <button class="mode-btn active" id="btnAuto" onclick="setMode('AUTO', this)">● Copilot Auto-Deflect + Smart Routing (Recommended)</button>
+            <button class="mode-btn" id="btnAssist" onclick="setMode('ASSIST', this)">Human Agent Assist Only (No Auto-Close)</button>
+          </div>
+        </div>
+
+        <!-- Step 3: Live Split View -->
+        <div class="workspace-grid">
+          <!-- Left: Customer Inquiry & Copilot Studio -->
+          <div class="panel">
+            <div class="panel-head">
+              <h2>Inbound Customer Channel &amp; Copilot Studio</h2>
+              <span style="font-family:var(--mono); font-size:0.71rem; color:#93c5fd;" id="channelLabel">CHANNEL: B2B PORTAL CHAT</span>
+            </div>
+
+            <div class="ticket-bubble">
+              <div class="ticket-meta">
+                <span id="accountLabel">Account: NordMech Precision AB</span>
+                <span id="entitlementLabel">Entitlement: Gold B2B Support</span>
+              </div>
+              <div class="ticket-text" id="inboundText"></div>
+            </div>
+
+            <div class="copilot-box">
+              <div class="copilot-header">
+                <span class="copilot-title">COPILOT STUDIO · RAG &amp; INTENT EVALUATION</span>
+                <span class="conf-badge" id="confBadge">CONFIDENCE: 94%</span>
+              </div>
+              <div class="copilot-reply" id="copilotReply"></div>
+              <div class="ai-notice-strip" id="aiNotice">
+                ✓ Art. 50 Transparency Notice Displayed · Grounded exclusively in approved D365 Knowledge Base · Zero-Data-Retention active
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: D365 Customer Service Case & Routing Output -->
+          <div class="panel">
+            <div class="panel-head">
+              <h2>Dynamics 365 Customer Service Case &amp; Queue State</h2>
+              <span style="font-family:var(--mono); font-size:0.71rem; color:#6ee7b7;" id="caseIdLabel">CASE: CAS-2026-0940</span>
+            </div>
+
+            <div id="outcomeBanner" class="outcome-banner outcome-deflected">
+              <div class="outcome-top">
+                <span class="outcome-status" id="outcomeTitle">DEFLECTED — RESOLVED VIA KNOWLEDGE ARTICLE</span>
+                <span class="sla-pill" id="slaBadge">TIER-2 ESCALATION: AVOIDED</span>
+              </div>
+              <div class="outcome-desc" id="outcomeDesc"></div>
+            </div>
+
+            <div class="d365-fields">
+              <div class="field-card">
+                <span>Assigned D365 Queue</span>
+                <strong id="fieldQueue"></strong>
+              </div>
+              <div class="field-card">
+                <span>Case Priority &amp; Origin</span>
+                <strong id="fieldPriority"></strong>
+              </div>
+              <div class="field-card">
+                <span>SLA Timer &amp; Entitlement Rule</span>
+                <strong id="fieldSla"></strong>
+              </div>
+              <div class="field-card">
+                <span>ERP / Power Automate Action</span>
+                <strong id="fieldErp"></strong>
+              </div>
+            </div>
+
+            <div class="ba-trace-box">
+              <strong>Business Analyst Functional &amp; Data Trace</strong>
+              <div id="baTraceText"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BA Artifacts Section -->
+    <section id="ba-artifacts" class="section-alt">
+      <div class="container">
+        <div class="step-label">Functional Analysis Deliverables</div>
+        <h2 class="section-title">How I Translate Support Operations into Dynamics 365 Requirements</h2>
+        <p class="section-sub">Explore the four core Business Analyst artefacts behind this PoC—built around out-of-the-box configuration, measurable KPIs, and clean developer handoffs.</p>
+
+        <div class="artifact-tabs" role="tablist">
+          <button class="art-btn active" onclick="switchArtifact('art-arch', this)">01 · OOTB Entity &amp; Integration Flow</button>
+          <button class="art-btn" onclick="switchArtifact('art-stories', this)">02 · User Stories &amp; Acceptance Criteria</button>
+          <button class="art-btn" onclick="switchArtifact('art-sla', this)">03 · Routing &amp; SLA Matrix</button>
+          <button class="art-btn" onclick="switchArtifact('art-kpi', this)">04 · Service KPI &amp; RCA Analytics</button>
+        </div>
+
+        <!-- Tab 1: OOTB Entity Flow -->
+        <div id="art-arch" class="art-panel active">
+          <h3 style="font-size:1.08rem; margin-bottom:0.35rem;">Out-of-the-Box (OOTB) Dynamics 365 Customer Service Data Model</h3>
+          <p style="font-size:0.86rem; color:var(--text-secondary);">Keeping core case management inside standard Dataverse tables and Power Automate flows—limiting external ERP integration strictly to read-only order/shipment lookups.</p>
+
+          <div class="flow-chain">
+            <div class="flow-node">
+              <span>01 · ACCOUNT</span>
+              <strong>B2B Customer &amp; Contact</strong>
+              <p>Identifies global manufacturing account, site location, and authorized technical contacts.</p>
+            </div>
+            <div class="flow-node">
+              <span>02 · ENTITLEMENT</span>
+              <strong>Support Contract Tier</strong>
+              <p>Validates active Platinum/Gold/Standard SLA terms before an agent touches the ticket.</p>
+            </div>
+            <div class="flow-node">
+              <span>03 · COPILOT STUDIO</span>
+              <strong>AI Deflection &amp; Triage</strong>
+              <p>Answers routine queries from approved KB articles with upfront AI disclosure.</p>
+            </div>
+            <div class="flow-node">
+              <span>04 · CASE &amp; QUEUES</span>
+              <strong>Automated Routing Rules</strong>
+              <p>Routes unresolved or Sev-1 cases by product line, language, and severity to specialist queues.</p>
+            </div>
+            <div class="flow-node">
+              <span>05 · ERP CONNECTOR</span>
+              <strong>Read-Only Order Lookup</strong>
+              <p>Power Automate fetches live shipment/batch status onto the Case form without duplicating ERP data.</p>
+            </div>
+            <div class="flow-node">
+              <span>06 · INSIGHTS &amp; RCA</span>
+              <strong>Repeat-Incident Loop</strong>
+              <p>Flags recurring SKU ticket clusters to trigger Root-Cause Analysis and new KB articles.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 2: User Stories -->
+        <div id="art-stories" class="art-panel">
+          <div class="story-grid">
+            <div class="story-card">
+              <div class="story-id">US-101 · ENTITLEMENT &amp; SLA ROUTING</div>
+              <h4>Priority Routing for Production-Down Cases</h4>
+              <p><strong>As a</strong> Customer Service Team Lead, <strong>I want</strong> incoming cases from Platinum accounts marked "Line Stoppage" to auto-route to the Priority Engineering Queue with a 15-minute SLA timer, <strong>so that</strong> critical customers never wait in general triage.</p>
+              <div class="ac-box">
+                <strong>Acceptance Criteria (Given / When / Then):</strong><br>
+                Given an active Platinum Entitlement,<br>
+                When a Case is created with Severity = Critical,<br>
+                Then D365 assigns the Priority Queue within 30 seconds and starts the 15-min First-Response SLA clock.
+              </div>
+            </div>
+
+            <div class="story-card">
+              <div class="story-id">US-102 · COPILOT KB DEFLECTION &amp; HANDOFF</div>
+              <h4>Grounded AI Self-Service with Human Escalation</h4>
+              <p><strong>As a</strong> B2B Support Customer, <strong>I want</strong> instant tooling specification answers from Copilot Studio with clear source citations and one-click specialist handoff, <strong>so that</strong> routine questions resolve immediately without dead-end bots.</p>
+              <div class="ac-box">
+                <strong>Acceptance Criteria (Given / When / Then):</strong><br>
+                Given a portal inquiry matching a published KB article with &ge;85% confidence,<br>
+                When Copilot responds, it displays an AI disclosure notice + KB ID; if confidence &lt;85%, it creates a D365 Case with full chat transcript attached.
+              </div>
+            </div>
+
+            <div class="story-card">
+              <div class="story-id">US-103 · READ-ONLY ERP ORDER VISIBILITY</div>
+              <h4>Zero-Custom-Code Order Status on Case Form</h4>
+              <p><strong>As a</strong> Support Specialist, <strong>I want</strong> to view live ERP shipment status directly inside the D365 Case side-panel, <strong>so that</strong> I do not switch across three legacy screens during customer calls.</p>
+              <div class="ac-box">
+                <strong>Acceptance Criteria (Given / When / Then):</strong><br>
+                Given a valid ERP Order ID entered on the Case form,<br>
+                When the agent opens the Order tab, Power Automate queries the ERP read-only API and displays dispatch ETA within 3 seconds without writing back to ERP.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 3: Routing & SLA Matrix -->
+        <div id="art-sla" class="art-panel">
+          <table class="sla-table">
+            <thead>
+              <tr>
+                <th>Entitlement Tier</th>
+                <th>Case Severity / Trigger</th>
+                <th>Automated Routing Rule</th>
+                <th>First-Response SLA</th>
+                <th>Escalation &amp; Pause Logic</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Platinum 24/7</strong></td>
+                <td>Critical (Line Stoppage)</td>
+                <td>Priority Application Engineering Queue</td>
+                <td><strong>15 Minutes</strong></td>
+                <td>Auto-notifies Duty Lead at 75% SLA elapsed; pauses only on "Waiting for Customer".</td>
+              </tr>
+              <tr>
+                <td><strong>Gold B2B</strong></td>
+                <td>High (Tooling / Process Fault)</td>
+                <td>Regional Technical Specialists Queue</td>
+                <td><strong>2 Business Hours</strong></td>
+                <td>Copilot drafts KB suggestions for agent; escalates to Tier-2 after 4 business hours.</td>
+              </tr>
+              <tr>
+                <td><strong>Gold / Standard</strong></td>
+                <td>Low (Spec / Feed-Rate Query)</td>
+                <td>Copilot Studio KB Deflection First</td>
+                <td><strong>Instant (AI) / 8h</strong></td>
+                <td>Auto-closes as Self-Service Resolved upon customer confirmation; creates Case if unconfirmed.</td>
+              </tr>
+              <tr>
+                <td><strong>Any Active Tier</strong></td>
+                <td>Repeat SKU Incident (&ge;3 in 14d)</td>
+                <td>BA Problem &amp; RCA Review Queue</td>
+                <td><strong>1 Business Day</strong></td>
+                <td>Triggers mandatory Root-Cause Analysis and Knowledge Article creation to prevent recurrence.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Tab 4: KPIs & Analytics -->
+        <div id="art-kpi" class="art-panel">
+          <h3 style="font-size:1.08rem; margin-bottom:0.35rem;">Operational Analytics &amp; Continuous Improvement Framework</h3>
+          <p style="font-size:0.86rem; color:var(--text-secondary); margin-bottom:1.1rem;">Applying the same structured ticket-pattern and RCA methodology that cut repeat incidents by ~35% across 20+ global accounts.</p>
+
+          <div class="kpi-grid">
+            <div class="kpi-card">
+              <strong>35%–45%</strong>
+              <h4>Copilot KB Deflection Rate</h4>
+              <p>Share of routine technical inquiries resolved accurately via verified Knowledge Articles without human queue load.</p>
+            </div>
+            <div class="kpi-card">
+              <strong>&ge;98.5%</strong>
+              <h4>Entitlement SLA Compliance</h4>
+              <p>Percentage of Priority and Gold cases meeting First-Response and Resolution timers tracked via D365 SLA KPIs.</p>
+            </div>
+            <div class="kpi-card">
+              <strong>~35% Drop</strong>
+              <h4>Repeat-Incident Reduction</h4>
+              <p>Target reduction in recurring product/workflow tickets driven by weekly RCA clustering and KB gap closure.</p>
+            </div>
+            <div class="kpi-card">
+              <strong>&lt;15%</strong>
+              <h4>Custom Code Footprint</h4>
+              <p>Enforcing OOTB Dataverse forms, business rules, and Power Automate flows to keep upgrades clean and low-risk.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <div>© 2025–2026 Sashidhar Sripadanna · IT Business Analyst · Dynamics 365 Customer Service &amp; AI PoC</div>
+        <div class="footer-links">
+          <a href="ba.html">IT BA Profile</a>
+          <a href="control-plane.html">AI Governance Simulator</a>
+          <a href="index.html">Full Portfolio</a>
+          <a href="https://www.linkedin.com/in/sashidhar-s-6a6662186" target="_blank" rel="noopener">LinkedIn</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const SCENARIOS = {
+      'SCN-01': {
+        channel: 'CHANNEL: B2B CUSTOMER PORTAL CHAT',
+        account: 'Account: NordMech Precision AB (Sweden)',
+        entitlement: 'Entitlement: Gold B2B Support · Active',
+        caseId: 'CASE: AUTO-DEFLECTED (NO TICKET NEEDED)',
+        caseIdAssist: 'CASE: CAS-2026-0940 (AGENT ASSIST)',
+        inbound: '"We are rough-turning 316L austenitic stainless steel sleeves on a CNC lathe and seeing built-up edge. Which PVD-coated carbide insert grade and starting cutting speed (vc) do you recommend?"',
+        conf: 'CONFIDENCE: 94% · KB-4012 MATCHED',
+        copilot: 'Recommended starting grade: PVD AlTiN-coated fine-grain carbide (Grade M20 equivalent) with positive chipbreaker geometry, running at vc = 165–190 m/min with high-pressure flood coolant..',
+        autoBanner: 'outcome-deflected',
+        autoTitle: 'DEFLECTED — RESOLVED VIA VERIFIED KNOWLEDGE BASE',
+        autoSla: 'TIER-2 ESCALATION: AVOIDED',
+        autoDesc: 'Copilot Studio answered directly from approved article KB-4012 with upfront AI disclosure. Customer confirmed resolution—saving specialist queue capacity.',
+        assistBanner: 'outcome-routed',
+        assistTitle: 'ROUTED TO SPECIALIST QUEUE — COPILOT DRAFT READY',
+        assistSla: 'FIRST-RESPONSE SLA: 2 HOURS',
+        assistDesc: 'Auto-deflection disabled. Case CAS-2026-0940 created in Regional Technical Specialists Queue with KB-4012 pre-attached in the agent assist pane.',
+        queueAuto: 'Self-Service Deflected (Logged to Insights)',
+        queueAssist: 'Regional Technical Specialists (Nordics)',
+        priority: 'Low · Origin: Portal Chat',
+        slaAuto: 'N/A — Deflected within 4 seconds',
+        slaAssist: 'Gold 2-Hour Response Clock Running',
+        erp: 'None required (Technical KB query only)',
+        trace: 'OOTB Entities: Account → Entitlement Check → Copilot Studio KB Search → CSAT Micro-Survey. Zero custom code; deflection metric logged to Customer Service Insights.'
+      },
+      'SCN-02': {
+        channel: 'CHANNEL: PRIORITY SUPPORT EMAIL + ERP WEBHOOK',
+        account: 'Account: Bergström Aerospace Components AB',
+        entitlement: 'Entitlement: Platinum 24/7 · Line-Stoppage Clause',
+        caseId: 'CASE: CAS-2026-0941 (CRITICAL)',
+        caseIdAssist: 'CASE: CAS-2026-0941 (CRITICAL)',
+        inbound: '"URGENT — Our 5-axis milling cell is halted waiting on custom solid-carbide end mills under Order #ERP-88412. Portal shows pending dispatch. Need immediate courier status and alternative tool spec."',
+        conf: 'INTENT: SEV-1 LINE DOWN · AUTO-ESCALATED',
+        copilot: 'Severity-1 production stoppage detected with Platinum Entitlement. Bypassed bot loop immediately, queried ERP Order #ERP-88412 (Status: Packed at Regional Hub, Air-Freight Cutoff in 55 mins), and packaged full context for Duty Engineer.',
+        autoBanner: 'outcome-urgent',
+        autoTitle: 'ESCALATED — PLATINUM 15-MIN SLA & PRIORITY QUEUE',
+        autoSla: 'SLA COUNTDOWN: 14M 42S REMAINING',
+        autoDesc: 'High-severity safeguard bypassed bot deflection, created Case CAS-2026-0941, attached live ERP shipment telemetry, and alerted the Priority Application Engineering Queue.',
+        assistBanner: 'outcome-urgent',
+        assistTitle: 'ESCALATED — PLATINUM 15-MIN SLA & PRIORITY QUEUE',
+        assistSla: 'SLA COUNTDOWN: 14M 42S REMAINING',
+        assistDesc: 'High-severity safeguard created Case CAS-2026-0941 immediately with read-only ERP Order #ERP-88412 status card populated on the Case form.',
+        queueAuto: 'Priority Application Engineering Queue',
+        queueAssist: 'Priority Application Engineering Queue',
+        priority: 'Critical (Sev-1) · Origin: Email / Portal',
+        slaAuto: 'Platinum 15-Min First Response · Duty Lead Alert at 75%',
+        slaAssist: 'Platinum 15-Min First Response · Duty Lead Alert at 75%',
+        erp: 'Power Automate Read-Only Lookup (#ERP-88412)',
+        trace: 'OOTB Entities: Account → Platinum Entitlement → Case → Power Automate ERP Read Connector → Priority Queue + SLA KPI Timer. Demonstrates human-in-the-loop hard stop on critical outages.'
+      },
+      'SCN-03': {
+        channel: 'CHANNEL: AUTOMATED REPEAT-INCIDENT RULE',
+        account: 'Account: Västmanland Heavy Machining Group',
+        entitlement: 'Entitlement: Gold B2B Support · Active',
+        caseId: 'CASE: CAS-2026-0942 + RCA FLAG',
+        caseIdAssist: 'CASE: CAS-2026-0942 + RCA FLAG',
+        inbound: '"Reporting premature flute chipping on Coolant-Through Drill SKU-CD90 during deep-hole alloy drilling. This is our third replacement batch issue logged in the past two weeks."',
+        conf: 'PATTERN ALERT: 3RD CASE ON SKU-CD90 IN 14 DAYS',
+        copilot: 'Detected recurring incident threshold (>=3 cases on SKU-CD90 within 14 days). Linked prior Cases CAS-2026-0891 & CAS-2026-0918, attached coolant pressure checklist, and opened a BA Problem/RCA task.',
+        autoBanner: 'outcome-routed',
+        autoTitle: 'ROUTED + REPEAT-INCIDENT RCA TRIGGERED',
+        autoSla: 'RCA REVIEW SLA: 1 BUSINESS DAY',
+        autoDesc: 'Case routed to Technical Specialists while an automated Power Automate rule cloned a summary into the BA Problem & RCA Review Queue to eliminate root-cause recurrence.',
+        assistBanner: 'outcome-routed',
+        assistTitle: 'ROUTED + REPEAT-INCIDENT RCA TRIGGERED',
+        assistSla: 'RCA REVIEW SLA: 1 BUSINESS DAY',
+        assistDesc: 'Case routed to Technical Specialists with prior ticket history linked and BA Problem/RCA flag raised for weekly telemetry review.',
+        queueAuto: 'Technical Specialists + BA Problem/RCA Queue',
+        queueAssist: 'Technical Specialists + BA Problem/RCA Queue',
+        priority: 'High · Origin: Repeat-Defect Rule',
+        slaAuto: 'Gold 2-Hour Response + 24h RCA Review',
+        slaAssist: 'Gold 2-Hour Response + 24h RCA Review',
+        erp: 'Batch Lot Cross-Reference Logged (Read-Only)',
+        trace: 'Directly mirrors my CBTS ~35% repeat-incident reduction workflow: querying Dataverse case clusters by SKU/symptom to drive permanent KB and engineering fixes.'
+      },
+      'SCN-04': {
+        channel: 'CHANNEL: PARTNER PORTAL ENHANCEMENT REQUEST',
+        account: 'Account: Skandia Tooling Distributors',
+        entitlement: 'Entitlement: Standard B2B Partner',
+        caseId: 'CASE: CAS-2026-0943 (BA TRIAGE)',
+        caseIdAssist: 'CASE: CAS-2026-0943 (BA TRIAGE)',
+        inbound: '"Can we get a custom JavaScript screen built inside our support portal to export monthly warranty claims into a bespoke XML format for our local accounting system?"',
+        conf: 'INTENT: CUSTOMIZATION ASK · OOTB CHECK',
+        copilot: 'Identified non-standard UI/export customization request. Tagged for IT Business Analyst Value-Effort-Risk discovery to evaluate OOTB Dataverse Excel/CSV export and standard Power Automate templates first.',
+        autoBanner: 'outcome-routed',
+        autoTitle: 'ROUTED TO IT BA DISCOVERY — OOTB-FIRST GUARDRAIL',
+        autoSla: 'DISCOVERY TRIAGE: 1 BUSINESS DAY',
+        autoDesc: 'Routed to IT Business Analyst & Entitlements Queue so requirements are challenged against standard OOTB export capabilities before approving custom code.',
+        assistBanner: 'outcome-routed',
+        assistTitle: 'ROUTED TO IT BA DISCOVERY — OOTB-FIRST GUARDRAIL',
+        assistSla: 'DISCOVERY TRIAGE: 1 BUSINESS DAY',
+        assistDesc: 'Routed to IT Business Analyst & Entitlements Queue for Value vs. Effort vs. Risk assessment.',
+        queueAuto: 'IT Business Analyst & Entitlements Queue',
+        queueAssist: 'IT Business Analyst & Entitlements Queue',
+        priority: 'Normal · Origin: Partner Enhancement Ask',
+        slaAuto: 'Standard 8-Business-Hour Response',
+        slaAssist: 'Standard 8-Business-Hour Response',
+        erp: 'Evaluated OOTB Dataverse Export vs. Custom Connector',
+        trace: 'Demonstrates pragmatic BA pushback: uncovering the underlying accounting export need and checking standard D365 views/Power Automate before creating technical debt.'
+      }
+    };
+
+    let currentScenario = 'SCN-01';
+    let currentMode = 'AUTO';
+
+    function selectScenario(scnId, btn) {
+      currentScenario = scnId;
+      document.querySelectorAll('#scnGrid .scn-card').forEach(c => c.classList.remove('active'));
+      btn.classList.add('active');
+      render();
+    }
+
+    function setMode(mode, btn) {
+      currentMode = mode;
+      document.querySelectorAll('.toggle-group .mode-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      render();
+    }
+
+    function switchArtifact(artId, btn) {
+      document.querySelectorAll('.art-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.art-panel').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById(artId).classList.add('active');
+    }
+
+    function render() {
+      const s = SCENARIOS[currentScenario];
+      const isAuto = currentMode === 'AUTO';
+
+      document.getElementById('channelLabel').textContent = s.channel;
+      document.getElementById('accountLabel').textContent = s.account;
+      document.getElementById('entitlementLabel').textContent = s.entitlement;
+      document.getElementById('inboundText').textContent = s.inbound;
+      document.getElementById('confBadge').textContent = s.conf;
+      document.getElementById('copilotReply').textContent = s.copilot;
+      document.getElementById('caseIdLabel').textContent = isAuto ? s.caseId : s.caseIdAssist;
+
+      const banner = document.getElementById('outcomeBanner');
+      banner.className = 'outcome-banner ' + (isAuto ? s.autoBanner : s.assistBanner);
+      document.getElementById('outcomeTitle').textContent = isAuto ? s.autoTitle : s.assistTitle;
+      document.getElementById('slaBadge').textContent = isAuto ? s.autoSla : s.assistSla;
+      document.getElementById('outcomeDesc').textContent = isAuto ? s.autoDesc : s.assistDesc;
+
+      document.getElementById('fieldQueue').textContent = isAuto ? s.queueAuto : s.queueAssist;
+      document.getElementById('fieldPriority').textContent = s.priority;
+      document.getElementById('fieldSla').textContent = isAuto ? s.slaAuto : s.slaAssist;
+      document.getElementById('fieldErp').textContent = s.erp;
+      document.getElementById('baTraceText').textContent = s.trace;
+    }
+
+    render();
+  </script>
+</body>
+</html>
